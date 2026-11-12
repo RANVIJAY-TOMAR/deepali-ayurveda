@@ -1,0 +1,292 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  Phone, 
+  Mail, 
+  MapPin, 
+  MessageCircle, 
+  Clock, 
+  CheckCircle, 
+  Send, 
+  ShieldCheck, 
+  ChevronRight,
+  PhoneCall,
+  Sparkles
+} from 'lucide-react';
+import { 
+  BRAND_NAME, 
+  BRAND_ADDRESS, 
+  BRAND_SUPPORT_PHONE, 
+  BRAND_SUPPORT_PHONE_DISPLAY,
+  BRAND_SUPPORT_EMAIL, 
+  BRAND_WHATSAPP_NUMBER, 
+  BRAND_ESTABLISHED,
+  VAIDYA_CONSULTATION_FEE 
+} from '../data/products';
+
+export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    subject: 'Dosage & Product Inquiry',
+    message: ''
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+  };
+
+  const handleWhatsApp = () => {
+    const text = encodeURIComponent(`Hello Deepali Ayurveda, I have an inquiry regarding your classical formulations.`);
+    window.open(`https://wa.me/${BRAND_WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <div className="space-y-16 pb-24 text-[#35251F]">
+      
+      {/* Header Banner */}
+      <section className="bg-gradient-to-b from-[#F5EFE5] via-[#FBF8F2] to-[#FBF8F2] border-b border-[#35251F]/15 pt-12 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 text-left">
+          <nav className="flex items-center gap-2 text-xs text-[#35251F]/60 font-medium">
+            <Link to="/" className="hover:text-[#A7835E] transition">Home</Link>
+            <ChevronRight className="w-3.5 h-3.5 text-[#35251F]/30" />
+            <span className="text-[#35251F] font-bold">Contact Us</span>
+          </nav>
+
+          <div className="max-w-3xl space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#35251F]/10 text-[#35251F] text-xs font-bold uppercase tracking-widest border border-[#35251F]/20">
+              <Sparkles className="w-3.5 h-3.5 text-[#A7835E]" />
+              <span>Unnao Apothecary • Mon-Sat 9:00 AM - 7:00 PM IST</span>
+            </div>
+            <h1 className="font-serif-luxury text-4xl sm:text-6xl font-bold text-[#35251F] tracking-tight leading-tight">
+              Contact Deepali Ayurveda
+            </h1>
+            <p className="text-sm sm:text-base text-[#35251F]/85 leading-relaxed font-light">
+              Have questions regarding classical preparations, 100% discreet shipping, dosage schedules, or booking a Vaidya call (₹{VAIDYA_CONSULTATION_FEE})? Our Unnao team is here to assist you.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Contact Grid */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          {/* Left Column: Official Contact Channels */}
+          <div className="lg:col-span-5 space-y-6 text-left">
+            
+            {/* Direct WhatsApp Action Card */}
+            <div className="bg-[#35251F] text-[#FBF8F2] p-8 rounded-sm space-y-5 shadow-lift border border-[#A7835E]/40">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#49352B] flex items-center justify-center text-[#D8C3A5]">
+                  <MessageCircle className="w-5 h-5 text-[#A7835E]" />
+                </div>
+                <div>
+                  <h3 className="font-serif-luxury text-xl font-bold text-white">Instant WhatsApp Connect</h3>
+                  <span className="text-[10px] uppercase tracking-wider text-[#D8C3A5]">Average response: 15 mins</span>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-[#D8C3A5]/90 leading-relaxed font-light">
+                Chat directly with our dispensary team for quick dosage questions, order tracking, and confidential inquiries.
+              </p>
+              <button
+                onClick={handleWhatsApp}
+                className="w-full py-3.5 btn-bronze rounded-sm text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Chat on WhatsApp</span>
+              </button>
+            </div>
+
+            {/* Direct Official Contact Cards */}
+            <div className="space-y-4">
+              
+              {/* Phone Helpline */}
+              <div className="p-6 bg-white rounded-sm border border-[#35251F]/15 flex items-start gap-4 shadow-subtle card-luxury">
+                <div className="w-10 h-10 rounded-full bg-[#F5EFE5] text-[#35251F] flex items-center justify-center shrink-0">
+                  <Phone className="w-5 h-5 text-[#A7835E]" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-xs uppercase tracking-wider font-bold text-[#A7835E] block">Telephone Helpline</span>
+                  <a
+                    href={`tel:${BRAND_SUPPORT_PHONE}`}
+                    className="font-serif-luxury text-xl font-bold text-[#35251F] hover:text-[#A7835E] transition block"
+                  >
+                    {BRAND_SUPPORT_PHONE_DISPLAY}
+                  </a>
+                  <p className="text-xs text-[#35251F]/70 font-light">Available Mon–Sat, 9:00 AM – 7:00 PM IST</p>
+                </div>
+              </div>
+
+              {/* Email Support */}
+              <div className="p-6 bg-white rounded-sm border border-[#35251F]/15 flex items-start gap-4 shadow-subtle card-luxury">
+                <div className="w-10 h-10 rounded-full bg-[#F5EFE5] text-[#35251F] flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5 text-[#A7835E]" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-xs uppercase tracking-wider font-bold text-[#A7835E] block">Email Inquiries</span>
+                  <a
+                    href={`mailto:${BRAND_SUPPORT_EMAIL}`}
+                    className="font-serif-luxury text-lg font-bold text-[#35251F] hover:text-[#A7835E] transition block break-all"
+                  >
+                    {BRAND_SUPPORT_EMAIL}
+                  </a>
+                  <p className="text-xs text-[#35251F]/70 font-light">Replies within 24 business hours</p>
+                </div>
+              </div>
+
+              {/* Office Address */}
+              <div className="p-6 bg-white rounded-sm border border-[#35251F]/15 flex items-start gap-4 shadow-subtle card-luxury">
+                <div className="w-10 h-10 rounded-full bg-[#F5EFE5] text-[#35251F] flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-[#A7835E]" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-xs uppercase tracking-wider font-bold text-[#A7835E] block">Office Address</span>
+                  <p className="text-sm font-semibold text-[#35251F] leading-snug">
+                    {BRAND_ADDRESS}
+                  </p>
+                  <p className="text-xs text-[#35251F]/70 font-light">Established {BRAND_ESTABLISHED} • Sacred River Ganga Region</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Right Column: Interactive Consultation & Message Form */}
+          <div className="lg:col-span-7">
+            <div className="bg-white p-8 sm:p-10 rounded-sm border border-[#35251F]/15 shadow-premium text-left space-y-6">
+              
+              <div className="border-b border-[#35251F]/10 pb-4">
+                <h3 className="font-serif-luxury text-2xl font-bold text-[#35251F]">
+                  Send an Apothecary Inquiry
+                </h3>
+                <p className="text-xs text-[#35251F]/70 font-light mt-1">
+                  Fill in your details below and our team will get in touch directly.
+                </p>
+              </div>
+
+              {!isSubmitted ? (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs uppercase tracking-wider font-bold text-[#35251F] mb-1.5">
+                        Your Full Name *
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="e.g. Ramesh Verma"
+                        className="w-full px-4 py-2.5 text-xs rounded-sm border border-[#35251F]/20 bg-[#FBF8F2] focus:outline-none focus:border-[#A7835E]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs uppercase tracking-wider font-bold text-[#35251F] mb-1.5">
+                        Mobile Number *
+                      </label>
+                      <input
+                        required
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="e.g. 9140086856"
+                        className="w-full px-4 py-2.5 text-xs rounded-sm border border-[#35251F]/20 bg-[#FBF8F2] focus:outline-none focus:border-[#A7835E]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs uppercase tracking-wider font-bold text-[#35251F] mb-1.5">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="name@example.com"
+                        className="w-full px-4 py-2.5 text-xs rounded-sm border border-[#35251F]/20 bg-[#FBF8F2] focus:outline-none focus:border-[#A7835E]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs uppercase tracking-wider font-bold text-[#35251F] mb-1.5">
+                        Inquiry Topic *
+                      </label>
+                      <select
+                        value={formData.subject}
+                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                        className="w-full px-4 py-2.5 text-xs rounded-sm border border-[#35251F]/20 bg-[#FBF8F2] focus:outline-none focus:border-[#A7835E]"
+                      >
+                        <option>Talk to a Vaidya (₹{VAIDYA_CONSULTATION_FEE})</option>
+                        <option>Daaru Mukti (1 Month Supply) Inquiry</option>
+                        <option>Plant Vitamin B12 / Mineral Guidance</option>
+                        <option>Digest Guru / Gut Health Questions</option>
+                        <option>Discreet Packaging & Order Dispatch</option>
+                        <option>Other General Question</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider font-bold text-[#35251F] mb-1.5">
+                      Your Message or Symptoms *
+                    </label>
+                    <textarea
+                      required
+                      rows={4}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Please share your questions or describe your symptoms..."
+                      className="w-full px-4 py-2.5 text-xs rounded-sm border border-[#35251F]/20 bg-[#FBF8F2] focus:outline-none focus:border-[#A7835E]"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-4 btn-espresso rounded-sm text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 cursor-pointer shadow-premium"
+                  >
+                    <Send className="w-4 h-4 text-[#D8C3A5]" />
+                    <span>Send Inquiry to Apothecary</span>
+                  </button>
+
+                  <div className="flex items-center justify-center gap-2 text-[11px] text-[#35251F]/70 pt-2 font-medium">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#A7835E]" />
+                    <span>100% Confidential • Dispatched directly to our Unnao pharmacy desk</span>
+                  </div>
+                </form>
+              ) : (
+                <div className="py-12 text-center space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-[#F5EFE5] text-[#35251F] border border-[#A7835E]/40 flex items-center justify-center mx-auto shadow-xs">
+                    <CheckCircle className="w-8 h-8 text-[#A7835E]" />
+                  </div>
+                  <h4 className="font-serif-luxury text-2xl font-bold text-[#35251F]">
+                    Inquiry Received Successfully
+                  </h4>
+                  <p className="text-xs sm:text-sm text-[#35251F]/80 max-w-md mx-auto font-light leading-relaxed">
+                    Thank you, <strong>{formData.name}</strong>. Your inquiry has been received by our Unnao pharmacy team. A representative will connect via phone or WhatsApp shortly.
+                  </p>
+                  <button
+                    onClick={() => setIsSubmitted(false)}
+                    className="px-6 py-2.5 btn-espresso rounded-sm text-xs uppercase tracking-wider font-semibold cursor-pointer"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
+              )}
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  );
+}
