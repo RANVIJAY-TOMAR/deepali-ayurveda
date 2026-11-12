@@ -1,27 +1,31 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
-import { PRODUCTS, CATEGORY_DETAILS } from '../data/products';
+import { CATEGORY_DETAILS } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 import ProductCard from '../components/products/ProductCard';
+import ProductCardSkeleton from '../components/products/ProductCardSkeleton';
+import CatalogErrorState from '../components/products/CatalogErrorState';
 
 export default function CategoriesPage() {
   const { categoryId } = useParams<{ categoryId?: string }>();
   const [activeCatId, setActiveCatId] = useState<string>(categoryId || 'all');
+  const { products, loading, error, refetch } = useProducts();
 
   const currentCategory = CATEGORY_DETAILS.find((c) => c.id === activeCatId);
 
   const displayedProducts = activeCatId === 'all'
-    ? PRODUCTS
-    : PRODUCTS.filter((p) => {
-        if (activeCatId === 'ayurvedic-medicines') return p.category === 'Ayurvedic Medicines';
-        if (activeCatId === 'herbal-formulations') return p.category === 'Herbal Formulations';
-        if (activeCatId === 'digestive-wellness') return p.category === 'Digestive Wellness';
-        return true;
-      });
+    ? products
+    : products.filter((p) => {
+      if (activeCatId === 'ayurvedic-medicines') return p.category === 'Ayurvedic Medicines';
+      if (activeCatId === 'herbal-formulations') return p.category === 'Herbal Formulations';
+      if (activeCatId === 'digestive-wellness') return p.category === 'Digestive Wellness';
+      return true;
+    });
 
   return (
     <div className="space-y-12 pb-24 text-[#35251F]">
-      
+
       {/* Header Banner */}
       <section className="bg-gradient-to-b from-[#F5EFE5] to-[#FBF8F2] border-b border-[#35251F]/15 pt-12 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 text-left">
@@ -50,29 +54,27 @@ export default function CategoriesPage() {
 
       {/* Main Categories & Products Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
+
         {/* Category Navigation Pills */}
         <div className="flex flex-wrap gap-2.5 border-b border-[#35251F]/10 pb-5">
           <button
             onClick={() => setActiveCatId('all')}
-            className={`px-5 py-2.5 rounded-sm text-xs uppercase tracking-wider font-bold transition cursor-pointer ${
-              activeCatId === 'all'
+            className={`px-5 py-2.5 rounded-sm text-xs uppercase tracking-wider font-bold transition cursor-pointer ${activeCatId === 'all'
                 ? 'bg-[#35251F] text-[#FBF8F2] shadow-xs'
                 : 'bg-white hover:bg-[#F5EFE5] text-[#35251F] border border-[#35251F]/15'
-            }`}
+              }`}
           >
-            All Categories ({PRODUCTS.length})
+            All Categories ({products.length})
           </button>
 
           {CATEGORY_DETAILS.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCatId(cat.id)}
-              className={`px-5 py-2.5 rounded-sm text-xs uppercase tracking-wider font-bold transition cursor-pointer ${
-                activeCatId === cat.id
+              className={`px-5 py-2.5 rounded-sm text-xs uppercase tracking-wider font-bold transition cursor-pointer ${activeCatId === cat.id
                   ? 'bg-[#35251F] text-[#FBF8F2] shadow-xs'
                   : 'bg-white hover:bg-[#F5EFE5] text-[#35251F] border border-[#35251F]/15'
-              }`}
+                }`}
             >
               {cat.title} ({cat.productCount})
             </button>
@@ -99,12 +101,20 @@ export default function CategoriesPage() {
           </div>
         )}
 
-        {/* Filtered Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedProducts.map((p, idx) => (
-            <ProductCard key={p.id} product={p} index={idx} />
-          ))}
-        </div>
+        {/* Filtered Products Grid: Loading, Error & Populated Grid */}
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ProductCardSkeleton count={3} />
+          </div>
+        ) : error ? (
+          <CatalogErrorState message={error} onRetry={refetch} />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {displayedProducts.map((p, idx) => (
+              <ProductCard key={p.id} product={p} index={idx} />
+            ))}
+          </div>
+        )}
 
       </section>
 

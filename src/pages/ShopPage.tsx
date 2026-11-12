@@ -7,18 +7,23 @@ import {
   ChevronRight, 
   Leaf, 
   X,
-  Sparkles
+  Sparkles,
+  RefreshCw
 } from 'lucide-react';
-import { PRODUCTS, CATEGORIES, BRAND_ESTABLISHED } from '../data/products';
+import { CATEGORIES, BRAND_ESTABLISHED } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 import ProductCard from '../components/products/ProductCard';
+import ProductCardSkeleton from '../components/products/ProductCardSkeleton';
+import CatalogErrorState from '../components/products/CatalogErrorState';
 
 export default function ShopPage() {
+  const { products, loading, error, refetch } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("popular");
 
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((p) => {
+    return products.filter((p) => {
       const matchesCategory =
         selectedCategory === "All Products" || p.category === selectedCategory;
 
@@ -33,7 +38,7 @@ export default function ShopPage() {
 
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [products, selectedCategory, searchQuery]);
 
   const sortedProducts = useMemo(() => {
     return [...filteredProducts].sort((a, b) => {
@@ -137,8 +142,28 @@ export default function ShopPage() {
           </div>
         </div>
 
-        {/* Product Grid */}
-        {sortedProducts.length > 0 ? (
+        {/* Product Catalog Views: Loading, Error, Empty & Populated Grid */}
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ProductCardSkeleton count={6} />
+          </div>
+        ) : error ? (
+          <CatalogErrorState message={error} onRetry={refetch} />
+        ) : products.length === 0 ? (
+          <div className="py-20 text-center space-y-4 bg-white rounded-sm border border-[#35251F]/15 p-8 max-w-md mx-auto shadow-xs">
+            <Leaf className="w-8 h-8 text-[#A7835E] mx-auto" />
+            <h3 className="font-serif-luxury text-xl font-bold text-[#35251F]">No Classical Remedies Available</h3>
+            <p className="text-xs text-[#35251F]/70 font-light">
+              Our apothecary catalog is currently refreshing from the Supabase database. Please try again shortly.
+            </p>
+            <button
+              onClick={refetch}
+              className="btn-bronze px-5 py-2.5 rounded-sm text-xs uppercase tracking-widest font-semibold cursor-pointer"
+            >
+              Refresh Catalog
+            </button>
+          </div>
+        ) : sortedProducts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {sortedProducts.map((product, idx) => (
               <ProductCard key={product.id} product={product} index={idx} />

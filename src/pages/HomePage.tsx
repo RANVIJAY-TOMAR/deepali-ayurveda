@@ -18,7 +18,6 @@ import {
   PhoneCall
 } from 'lucide-react';
 import { 
-  PRODUCTS, 
   CATEGORY_DETAILS, 
   VERIFIED_TESTIMONIALS,
   BRAND_NAME,
@@ -33,8 +32,10 @@ import {
   BRAND_STORYLINE_HERITAGE,
   VAIDYA_CONSULTATION_FEE
 } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 import CinematicHero from '../components/hero/CinematicHero';
 import ProductCard from '../components/products/ProductCard';
+import ProductCardSkeleton from '../components/products/ProductCardSkeleton';
 import TalkToVaidyaSection from '../components/sections/TalkToVaidyaSection';
 import { formatPrice } from '../lib/format';
 
@@ -44,13 +45,18 @@ interface HomePageProps {
 }
 
 export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
+  const { products, loading } = useProducts();
+
   // Flagship formulations for top showcase: Daaru Mukti (1 Month Supply), Plant B12, Digest Guru
-  const flagshipRemedies = PRODUCTS.filter((p) => 
-    ["daaru-mukti-powder", "vitamin-b12-d3-k2-calcium", "digest-guru-churan"].includes(p.id)
+  const flagshipSlugs = ['daaru-mukti-powder', 'b12', 'digest-guru'];
+  const flagshipRemedies = products.filter((p) => 
+    flagshipSlugs.includes(p.slug || '') ||
+    ['daaru-mukti-powder', 'vitamin-b12-d3-k2-calcium', 'digest-guru-churan'].includes(p.id)
   );
 
-  // All 5 classical remedies for the complete catalogue
-  const allClassicalRemedies = PRODUCTS;
+  const daaruMuktiProduct = products.find(
+    (p) => p.slug === 'daaru-mukti-powder' || p.id === 'daaru-mukti-powder'
+  );
 
   const handleWhatsAppHelp = () => {
     const text = encodeURIComponent(`Hello Deepali Ayurveda, I would like consultation regarding your classical remedies.`);
@@ -90,9 +96,13 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
 
         {/* 3 Impressive Flagship Product Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {flagshipRemedies.map((product, idx) => (
-            <ProductCard key={product.id} product={product} index={idx} />
-          ))}
+          {loading ? (
+            <ProductCardSkeleton count={3} />
+          ) : (
+            flagshipRemedies.map((product, idx) => (
+              <ProductCard key={product.id} product={product} index={idx} />
+            ))
+          )}
         </div>
       </section>
 
@@ -187,7 +197,7 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
                     1 Month Supply (30 Sachets)
                   </span>
                   <span className="text-3xl font-bold font-serif-luxury text-[#FBF8F2] block">
-                    ₹1,100
+                    {formatPrice(daaruMuktiProduct?.price ?? 1100)}
                   </span>
                   <span className="text-xs text-[#D8C3A5]/60 line-through">₹1,599</span>
                 </div>
@@ -284,9 +294,13 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {allClassicalRemedies.map((product, idx) => (
-            <ProductCard key={product.id} product={product} index={idx} />
-          ))}
+          {loading ? (
+            <ProductCardSkeleton count={5} />
+          ) : (
+            products.map((product, idx) => (
+              <ProductCard key={product.id} product={product} index={idx} />
+            ))
+          )}
         </div>
       </section>
 

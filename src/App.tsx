@@ -26,6 +26,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsConditionsPage from './pages/TermsConditionsPage';
 import ShippingReturnsPage from './pages/ShippingReturnsPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
+import AdminDashboard from './pages/AdminDashboard';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -123,6 +124,9 @@ export default function App() {
 
               {/* Order Success Confirmation */}
               <Route path="/order-success/:orderId" element={<OrderSuccessPage />} />
+
+              {/* Secure Dispensary Admin Portal */}
+              <Route path="/admin" element={<AdminDashboard />} />
 
               {/* 404 Fallback */}
               <Route

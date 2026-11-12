@@ -27,7 +27,7 @@ export default function TextReveal({
     }),
   };
 
-  const childVariants = {
+  const childVariants: any = {
     hidden: {
       opacity: 0,
       y: 20,
@@ -45,11 +45,11 @@ export default function TextReveal({
     },
   };
 
-  const MotionComponent = motion[Component] || motion.span;
+  const MotionComponent = (motion as any)[Component] || motion.span;
 
   return (
     <MotionComponent
-      ref={ref}
+      ref={ref as any}
       variants={containerVariants}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}

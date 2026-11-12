@@ -23,11 +23,13 @@ import {
   Truck,
   PhoneCall
 } from 'lucide-react';
-import { PRODUCTS, BRAND_NAME, VAIDYA_CONSULTATION_FEE } from '../data/products';
+import { BRAND_NAME, VAIDYA_CONSULTATION_FEE } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { formatPrice } from '../lib/format';
+import { useProduct, useProducts } from '../hooks/useProducts';
 import ProductCard from '../components/products/ProductCard';
+import CatalogErrorState from '../components/products/CatalogErrorState';
 
 interface ProductDetailPageProps {
   onOpenConsult?: () => void;
@@ -38,6 +40,8 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const { product, loading, error, refetch } = useProduct(id);
+  const { products: allProducts } = useProducts();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'symptoms' | 'ingredients' | 'dosage' | 'safety'>('symptoms');
   const [copiedLink, setCopiedLink] = useState(false);
@@ -53,7 +57,40 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
     return null;
   }
 
-  const product = PRODUCTS.find((p) => p.id === id);
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12 text-[#35251F] animate-pulse">
+        <div className="h-4 w-48 bg-[#35251F]/10 rounded-xs" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="lg:col-span-5 aspect-square bg-[#FAF6EE] rounded-sm border border-[#35251F]/10" />
+          <div className="lg:col-span-7 space-y-6">
+            <div className="h-4 w-32 bg-[#A7835E]/20 rounded-xs" />
+            <div className="h-10 w-3/4 bg-[#35251F]/15 rounded-xs" />
+            <div className="h-4 w-1/2 bg-[#35251F]/10 rounded-xs" />
+            <div className="h-8 w-28 bg-[#35251F]/20 rounded-xs" />
+            <div className="h-24 w-full bg-[#35251F]/10 rounded-sm" />
+            <div className="h-12 w-full bg-[#35251F]/15 rounded-sm" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-28 text-center space-y-6">
+        <CatalogErrorState message={error} onRetry={refetch} title="Formulation Data Unavailable" />
+        <div>
+          <Link
+            to="/shop"
+            className="btn-espresso inline-block px-8 py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold"
+          >
+            Return to Catalog
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -73,17 +110,21 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
     );
   }
 
-  const isDaaruMukti = product.id === 'daaru-mukti-powder';
-  const relatedProducts = PRODUCTS.filter((p) => p.id !== product.id).slice(0, 3);
+  const isDaaruMukti = product.slug === 'daaru-mukti-powder' || product.id === 'daaru-mukti-powder';
+  const relatedProducts = allProducts
+    .filter((p) => p.id !== product.id && p.slug !== product.slug)
+    .slice(0, 3);
   const isWishlisted = isInWishlist(product.id);
 
   const handleAddToCart = () => {
+    if (!product.inStock) return;
     addToCart(product, quantity);
     setAddedNotice(true);
     setTimeout(() => setAddedNotice(false), 2000);
   };
 
   const handleBuyNow = () => {
+    if (!product.inStock) return;
     addToCart(product, quantity);
     navigate('/checkout');
   };
@@ -251,10 +292,17 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
                 Save {formatPrice(product.originalPrice - product.price)}
               </span>
             )}
-            <span className="text-xs text-[#35251F] ml-auto flex items-center gap-1 font-bold">
-              <CheckCircle2 className="w-4 h-4 text-[#A7835E]" />
-              <span>In Stock</span>
-            </span>
+            {product.inStock ? (
+              <span className="text-xs text-[#35251F] ml-auto flex items-center gap-1 font-bold">
+                <CheckCircle2 className="w-4 h-4 text-[#A7835E]" />
+                <span>In Stock</span>
+              </span>
+            ) : (
+              <span className="text-xs text-amber-900 ml-auto flex items-center gap-1 font-bold bg-amber-50 px-2 py-0.5 rounded-xs border border-amber-200">
+                <AlertCircle className="w-3.5 h-3.5 text-amber-700" />
+                <span>Temporarily Out of Stock</span>
+              </span>
+            )}
           </div>
 
           {/* Confidential Packaging Reassurance */}
@@ -274,16 +322,18 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
               <span className="text-xs uppercase tracking-wider text-[#35251F] font-bold">Quantity:</span>
               <div className="flex items-center border border-[#35251F]/20 bg-white rounded-sm shadow-xs">
                 <button
+                  disabled={!product.inStock}
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-2.5 hover:bg-[#F5EFE5] text-[#35251F] transition cursor-pointer"
+                  className="p-2.5 hover:bg-[#F5EFE5] text-[#35251F] transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                   aria-label="Decrease quantity"
                 >
                   <Minus className="w-3.5 h-3.5" />
                 </button>
                 <span className="px-4 text-sm font-bold text-[#35251F]">{quantity}</span>
                 <button
+                  disabled={!product.inStock}
                   onClick={() => setQuantity(quantity + 1)}
-                  className="p-2.5 hover:bg-[#F5EFE5] text-[#35251F] transition cursor-pointer"
+                  className="p-2.5 hover:bg-[#F5EFE5] text-[#35251F] transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                   aria-label="Increase quantity"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -297,18 +347,34 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
               <button
+                disabled={!product.inStock}
                 onClick={handleAddToCart}
-                className="py-4 px-5 bg-white hover:bg-[#F5EFE5] text-[#35251F] border-2 border-[#35251F] text-xs uppercase tracking-widest font-bold rounded-sm transition cursor-pointer flex items-center justify-center gap-2 shadow-xs"
+                className={`py-4 px-5 text-xs uppercase tracking-widest font-bold rounded-sm transition flex items-center justify-center gap-2 shadow-xs ${
+                  !product.inStock
+                    ? 'bg-[#35251F]/10 text-[#35251F]/40 border border-[#35251F]/20 cursor-not-allowed'
+                    : 'bg-white hover:bg-[#F5EFE5] text-[#35251F] border-2 border-[#35251F] cursor-pointer'
+                }`}
               >
                 <ShoppingBag className="w-4 h-4" />
-                <span>{addedNotice ? 'Added to Basket ✓' : 'Add to Basket'}</span>
+                <span>
+                  {!product.inStock
+                    ? 'Out of Stock'
+                    : addedNotice
+                    ? 'Added to Basket ✓'
+                    : 'Add to Basket'}
+                </span>
               </button>
 
               <button
+                disabled={!product.inStock}
                 onClick={handleBuyNow}
-                className="btn-bronze py-4 px-5 text-xs uppercase tracking-widest font-bold rounded-sm transition cursor-pointer flex items-center justify-center gap-2 shadow-premium"
+                className={`py-4 px-5 text-xs uppercase tracking-widest font-bold rounded-sm transition flex items-center justify-center gap-2 ${
+                  !product.inStock
+                    ? 'bg-[#35251F]/20 text-[#35251F]/40 cursor-not-allowed'
+                    : 'btn-bronze cursor-pointer shadow-premium'
+                }`}
               >
-                <span>Purchase Formulation</span>
+                <span>{!product.inStock ? 'Currently Unavailable' : 'Purchase Formulation'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

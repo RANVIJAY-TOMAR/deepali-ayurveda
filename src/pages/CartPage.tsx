@@ -143,14 +143,14 @@ export default function CartPage() {
                   />
                   <div className="space-y-1 text-left">
                     <Link
-                      to={`/product/${product.id}`}
+                      to={`/product/${product.slug || product.id}`}
                       className="font-serif-luxury text-base sm:text-lg font-bold text-[#35251F] hover:text-[#A7835E] transition block"
                     >
                       {product.name}
                     </Link>
                     <div className="flex items-center gap-2 text-xs text-[#A7835E] font-bold">
                       <span>{product.volume}</span>
-                      {product.id === 'daaru-mukti-powder' && (
+                      {(product.slug === 'daaru-mukti-powder' || product.id === 'daaru-mukti-powder') && (
                         <span className="px-2 py-0.5 bg-[#F5EFE5] text-[#35251F] border border-[#D8C3A5] rounded-xs text-[10px] uppercase tracking-wider font-bold">
                           1 Month Supply
                         </span>

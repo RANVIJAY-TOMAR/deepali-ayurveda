@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, PhoneCall, CheckCircle, ShieldCheck, Sparkles, Clock, Lock } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { X, PhoneCall, CheckCircle, ShieldCheck, Clock, Lock, AlertCircle, RefreshCw } from 'lucide-react';
 import { BRAND_NAME, BRAND_SUPPORT_PHONE, VAIDYA_CONSULTATION_FEE } from '../data/products';
+import { bookVaidyaConsultation } from '../lib/consultations';
 
 interface DoctorConsultModalProps {
   isOpen: boolean;
@@ -15,17 +16,37 @@ export default function DoctorConsultModal({ isOpen, onClose }: DoctorConsultMod
     concern: '',
     preferredTime: 'Morning (10:00 AM - 1:00 PM IST)'
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [bookingReference, setBookingReference] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    const result = await bookVaidyaConsultation(formData);
+
+    setIsSubmitting(false);
+
+    if (!result.success) {
+      setErrorMessage(result.error || 'Failed to register consultation appointment.');
+      return;
+    }
+
+    setBookingReference(result.bookingId || null);
     setIsSubmitted(true);
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setErrorMessage(null);
+    setBookingReference(null);
     setFormData({
       name: '',
       phone: '',
@@ -86,6 +107,13 @@ export default function DoctorConsultModal({ isOpen, onClose }: DoctorConsultMod
               </p>
             </div>
 
+            {errorMessage && (
+              <div className="p-3.5 bg-red-50 border border-red-200 text-red-800 rounded-sm text-xs flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
             <div>
               <label className="block text-xs uppercase tracking-wider font-bold text-[#35251F] mb-1.5">
                 Customer Name *
@@ -93,6 +121,7 @@ export default function DoctorConsultModal({ isOpen, onClose }: DoctorConsultMod
               <input
                 required
                 type="text"
+                minLength={2}
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="e.g. Anand Kumar"
@@ -116,7 +145,7 @@ export default function DoctorConsultModal({ isOpen, onClose }: DoctorConsultMod
 
             <div>
               <label className="block text-xs uppercase tracking-wider font-bold text-[#35251F] mb-1.5">
-                Preferred Consultation Date or Time *
+                Preferred Consultation Time *
               </label>
               <select
                 value={formData.preferredTime}
@@ -146,9 +175,17 @@ export default function DoctorConsultModal({ isOpen, onClose }: DoctorConsultMod
             <div className="pt-2 space-y-3">
               <button
                 type="submit"
-                className="w-full py-4 btn-bronze text-xs uppercase tracking-widest font-bold rounded-sm shadow-premium cursor-pointer"
+                disabled={isSubmitting}
+                className="w-full py-4 btn-bronze text-xs uppercase tracking-widest font-bold rounded-sm shadow-premium cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                BOOK A CONSULTATION (₹{VAIDYA_CONSULTATION_FEE})
+                {isSubmitting ? (
+                  <>
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                    <span>REGISTERING BOOKING...</span>
+                  </>
+                ) : (
+                  <span>BOOK A CONSULTATION (₹{VAIDYA_CONSULTATION_FEE})</span>
+                )}
               </button>
 
               <div className="flex items-center justify-center gap-2 text-[11px] text-[#35251F]/70 font-medium">
@@ -165,11 +202,14 @@ export default function DoctorConsultModal({ isOpen, onClose }: DoctorConsultMod
             <div className="space-y-1">
               <h4 className="font-serif-luxury text-2xl font-bold text-[#35251F]">Booking Request Received</h4>
               <p className="text-xs text-[#35251F]/80 leading-relaxed max-w-sm mx-auto font-light">
-                Thank you, <strong>{formData.name}</strong>. Our Ayurvedic consultation coordinator will connect with you at <strong>{formData.phone}</strong> during {formData.preferredTime}.
+                Thank you, <strong>{formData.name}</strong>. Your consultation booking has been registered with our Unnao dispensary team. Our coordinator will connect at <strong>{formData.phone}</strong> during {formData.preferredTime}.
               </p>
             </div>
-            <div className="p-4 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/30 text-xs text-[#35251F] font-medium max-w-sm mx-auto">
-              Consultation Fee: ₹{VAIDYA_CONSULTATION_FEE} • Direct Helpline: <strong>{BRAND_SUPPORT_PHONE}</strong>
+            <div className="p-4 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/30 text-xs text-[#35251F] font-medium max-w-sm mx-auto space-y-1">
+              <div>Consultation Fee: ₹{VAIDYA_CONSULTATION_FEE} • Direct Helpline: <strong>{BRAND_SUPPORT_PHONE}</strong></div>
+              {bookingReference && (
+                <div className="text-[11px] font-mono text-[#35251F]/60">Booking ID: {bookingReference}</div>
+              )}
             </div>
             <button
               onClick={handleReset}

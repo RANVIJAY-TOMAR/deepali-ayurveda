@@ -19,11 +19,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const isFavorite = isInWishlist(product.id);
-  const isDaaruMukti = product.id === 'daaru-mukti-powder';
+  const isDaaruMukti = product.slug === 'daaru-mukti-powder' || product.id === 'daaru-mukti-powder';
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!product.inStock) return;
     addToCart(product, 1);
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 1400);
@@ -54,6 +55,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         {/* Top Badges & Wishlist */}
         <div className="absolute top-3 left-3 right-3 z-10 flex items-center justify-between pointer-events-none">
           <div className="flex flex-col gap-1 items-start">
+            {!product.inStock && (
+              <span className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-[#35251F]/90 text-[#F5EFE5] border border-[#35251F]/20 rounded-xs shadow-xs pointer-events-auto">
+                Out of Stock
+              </span>
+            )}
+
             {isDaaruMukti ? (
               <span className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-[#35251F] text-[#FBF8F2] border border-[#A7835E]/60 rounded-xs shadow-xs pointer-events-auto">
                 ★ 1 Month Supply
@@ -85,7 +92,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         </div>
 
         {/* Product Image Frame */}
-        <Link to={`/product/${product.id}`} className="block relative aspect-square bg-[#FAF6EE] overflow-hidden flex items-center justify-center p-5 group-hover:bg-[#F2ECE1] transition-colors">
+        <Link to={`/product/${product.slug || product.id}`} className="block relative aspect-square bg-[#FAF6EE] overflow-hidden flex items-center justify-center p-5 group-hover:bg-[#F2ECE1] transition-colors">
           <img
             src={product.image}
             alt={product.name}
@@ -108,7 +115,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </div>
 
             {/* Product Title */}
-            <Link to={`/product/${product.id}`} className="block group-hover:text-[#A7835E] transition-colors">
+            <Link to={`/product/${product.slug || product.id}`} className="block group-hover:text-[#A7835E] transition-colors">
               <h3 className="font-serif-luxury text-lg sm:text-xl font-bold text-[#35251F] leading-snug">
                 {product.name}
               </h3>
@@ -163,14 +170,19 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
 
             {/* Quick Add To Basket Button */}
             <button
+              disabled={!product.inStock}
               onClick={handleAddToCart}
-              className={`w-full py-3 px-4 rounded-sm text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition duration-300 shadow-sm cursor-pointer ${
-                isAdded
-                  ? 'bg-[#35251F] text-[#FBF8F2]'
-                  : 'btn-bronze text-[#FBF8F2]'
+              className={`w-full py-3 px-4 rounded-sm text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition duration-300 shadow-sm ${
+                !product.inStock
+                  ? 'bg-[#35251F]/10 text-[#35251F]/50 cursor-not-allowed border border-[#35251F]/15'
+                  : isAdded
+                  ? 'bg-[#35251F] text-[#FBF8F2] cursor-pointer'
+                  : 'btn-bronze text-[#FBF8F2] cursor-pointer'
               }`}
             >
-              {isAdded ? (
+              {!product.inStock ? (
+                <span>Out of Stock</span>
+              ) : isAdded ? (
                 <>
                   <Check className="w-4 h-4 text-[#D8C3A5]" />
                   <span>Added to Basket</span>

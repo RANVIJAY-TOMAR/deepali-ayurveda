@@ -56,7 +56,7 @@ export default function CartDrawer() {
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <motion.div 
+        <motion.div
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
@@ -152,7 +152,7 @@ export default function CartDrawer() {
                         </button>
                       </div>
                       <span className="text-[11px] text-[#A7835E] font-bold">
-                        {product.id === 'daaru-mukti-powder' ? '1 Month Supply' : product.volume}
+                        {(product.slug === 'daaru-mukti-powder' || product.id === 'daaru-mukti-powder') ? '1 Month Supply' : product.volume}
                       </span>
                     </div>
 
@@ -189,7 +189,7 @@ export default function CartDrawer() {
           {/* Footer & Checkout Breakdown */}
           {items.length > 0 && (
             <div className="p-6 border-t border-[#35251F]/15 bg-white space-y-4">
-              
+
               {/* Promo Coupon Form */}
               <form onSubmit={handleApplyCoupon} className="space-y-1.5">
                 <div className="flex gap-2">

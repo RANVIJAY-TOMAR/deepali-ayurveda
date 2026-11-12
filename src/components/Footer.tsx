@@ -151,25 +151,25 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/product/vitamin-b12-d3-k2-calcium" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
+                <Link to="/product/b12" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
                   <span>Plant Vitamin B12 (4-in-1)</span>
                   <span className="text-[10px] text-[#A7835E] font-bold">₹599</span>
                 </Link>
               </li>
               <li>
-                <Link to="/product/sea-buckthorn-extract-capsules" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
+                <Link to="/product/sea-buckthorn" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
                   <span>Sea Buckthorn Pure Extract</span>
                   <span className="text-[10px] text-[#A7835E] font-bold">₹599</span>
                 </Link>
               </li>
               <li>
-                <Link to="/product/apple-cider-vinegar-moringa" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
+                <Link to="/product/apple-cider-vinegar" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
                   <span>Apple Cider Vinegar + Moringa</span>
                   <span className="text-[10px] text-[#A7835E] font-bold">₹293</span>
                 </Link>
               </li>
               <li>
-                <Link to="/product/digest-guru-churan" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
+                <Link to="/product/digest-guru" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
                   <span>Digest Guru Churan</span>
                   <span className="text-[10px] text-[#A7835E] font-bold">₹199</span>
                 </Link>

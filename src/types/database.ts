@@ -93,6 +93,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       customer_profiles: {
         Row: {
@@ -125,6 +126,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       customer_addresses: {
         Row: {
@@ -166,6 +168,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       orders: {
         Row: {
@@ -219,6 +222,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       order_items: {
         Row: {
@@ -251,6 +255,7 @@ export interface Database {
           line_total?: number;
           created_at?: string;
         };
+        Relationships: [];
       };
       payments: {
         Row: {
@@ -292,6 +297,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       consultation_bookings: {
         Row: {
@@ -339,7 +345,71 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
+    };
+    Functions: {
+      submit_checkout: {
+        Args: {
+          p_delivery_address: Json;
+          p_items: Json;
+          p_customer_notes?: string | null;
+        };
+        Returns: {
+          order_id: string;
+          order_reference: string;
+          guest_token: string | null;
+          subtotal: number;
+          shipping_fee: number;
+          discount_amount: number;
+          total_amount: number;
+          status: string;
+        };
+      };
+      get_guest_order: {
+        Args: {
+          p_order_reference: string;
+          p_guest_token: string;
+        };
+        Returns: Array<{
+          order_id: string;
+          order_reference: string;
+          razorpay_order_id: string | null;
+          delivery_address: Json;
+          subtotal: number;
+          shipping_fee: number;
+          discount_amount: number;
+          total_amount: number;
+          status: string;
+          created_at: string;
+          order_items: Json;
+        }>;
+      };
+      is_admin: {
+        Args: Record<string, never>;
+        Returns: boolean;
+      };
+      check_consultation_rate_limit: {
+        Args: Record<string, never>;
+        Returns: unknown;
+      };
+      bootstrap_initial_admin: {
+        Args: {
+          admin_email: string;
+        };
+        Returns: Json;
+      };
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Enums: {
+      order_status: OrderStatus;
+      payment_status: PaymentStatus;
+      consultation_status: ConsultationStatus;
+    };
+    CompositeTypes: {
+      [_ in never]: never;
     };
   };
 }

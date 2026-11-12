@@ -39,12 +39,13 @@ REVOKE ALL ON FUNCTION public.handle_updated_at() FROM PUBLIC;
 -- Unsafe CURRENT_USER checks are completely omitted.
 CREATE OR REPLACE FUNCTION public.is_admin()
 RETURNS boolean
-LANGUAGE sql
+LANGUAGE plpgsql
 SECURITY DEFINER
 STABLE
 SET search_path = public, pg_temp
 AS $$
-  SELECT COALESCE(
+BEGIN
+  RETURN COALESCE(
     (auth.jwt() ->> 'role' = 'service_role') OR
     EXISTS (
       SELECT 1 FROM public.customer_profiles
@@ -52,6 +53,7 @@ AS $$
     ),
     false
   );
+END;
 $$;
 
 REVOKE ALL ON FUNCTION public.is_admin() FROM PUBLIC;
@@ -163,14 +165,18 @@ BEGIN
     RAISE EXCEPTION 'Unauthorized: Initial admin bootstrap is permanently disabled because an administrator already exists.';
   END IF;
 
-  SELECT id INTO v_user_id FROM auth.users WHERE email = admin_email;
+  SELECT id INTO v_user_id 
+  FROM auth.users 
+  WHERE lower(trim(email)) = lower(trim(admin_email))
+  LIMIT 1;
+
   IF NOT FOUND THEN
-    RAISE EXCEPTION 'User with email "%" does not exist in auth.users. Please sign up the account first.', admin_email;
+    RAISE EXCEPTION 'User with email "%" does not exist in auth.users. Please sign up the account first.', trim(admin_email);
   END IF;
 
   INSERT INTO public.customer_profiles (id, email, is_admin, created_at, updated_at)
-  VALUES (v_user_id, admin_email, true, now(), now())
-  ON CONFLICT (id) DO UPDATE SET is_admin = true, updated_at = now();
+  VALUES (v_user_id, lower(trim(admin_email)), true, now(), now())
+  ON CONFLICT (id) DO UPDATE SET is_admin = true, email = lower(trim(admin_email)), updated_at = now();
 END;
 $$;
 
@@ -254,63 +260,6 @@ DROP TRIGGER IF EXISTS tr_orders_updated_at ON public.orders;
 CREATE TRIGGER tr_orders_updated_at
   BEFORE UPDATE ON public.orders
   FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
-
--- Secure Order Lookup for Guests
--- Requires matching BOTH order_reference and unguessable bearer guest_token.
--- Never exposes the guest_token in the returned columns.
-CREATE OR REPLACE FUNCTION public.get_guest_order(p_order_reference TEXT, p_guest_token UUID)
-RETURNS TABLE (
-  order_id UUID,
-  order_reference TEXT,
-  razorpay_order_id TEXT,
-  delivery_address JSONB,
-  subtotal NUMERIC(10, 2),
-  shipping_fee NUMERIC(10, 2),
-  discount_amount NUMERIC(10, 2),
-  total_amount NUMERIC(10, 2),
-  status TEXT,
-  created_at TIMESTAMPTZ,
-  order_items JSONB
-)
-LANGUAGE sql
-SECURITY DEFINER
-STABLE
-SET search_path = public, pg_temp
-AS $$
-  SELECT
-    o.id AS order_id,
-    o.order_reference,
-    o.razorpay_order_id,
-    o.delivery_address,
-    o.subtotal,
-    o.shipping_fee,
-    o.discount_amount,
-    o.total_amount,
-    o.status,
-    o.created_at,
-    COALESCE(
-      (
-        SELECT jsonb_agg(
-          jsonb_build_object(
-            'product_name', oi.product_name,
-            'unit_price', oi.unit_price,
-            'quantity', oi.quantity,
-            'line_total', oi.line_total
-          )
-        )
-        FROM public.order_items oi
-        WHERE oi.order_id = o.id
-      ),
-      '[]'::jsonb
-    ) AS order_items
-  FROM public.orders o
-  WHERE o.order_reference = p_order_reference
-    AND o.guest_token = p_guest_token
-    AND o.customer_id IS NULL;
-$$;
-
-REVOKE ALL ON FUNCTION public.get_guest_order(TEXT, UUID) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION public.get_guest_order(TEXT, UUID) TO anon, authenticated, service_role;
 
 -- Dedicated server-side function to assign Razorpay Order ID to an existing pending order
 CREATE OR REPLACE FUNCTION public.set_order_razorpay_id(p_order_id UUID, p_razorpay_order_id TEXT)
@@ -464,7 +413,72 @@ CREATE TRIGGER tr_recalculate_order_totals
   AFTER INSERT OR UPDATE OR DELETE ON public.order_items
   FOR EACH ROW EXECUTE FUNCTION public.recalculate_order_totals();
 
--- Controlled Atomic Checkout Function
+-- ==============================================================================
+-- 8. SECURE ORDER LOOKUP FOR GUESTS
+-- ==============================================================================
+-- Requires matching BOTH order_reference and unguessable bearer guest_token.
+-- Never exposes the guest_token in the returned columns.
+-- Placed after both public.orders and public.order_items exist.
+CREATE OR REPLACE FUNCTION public.get_guest_order(p_order_reference TEXT, p_guest_token UUID)
+RETURNS TABLE (
+  order_id UUID,
+  order_reference TEXT,
+  razorpay_order_id TEXT,
+  delivery_address JSONB,
+  subtotal NUMERIC(10, 2),
+  shipping_fee NUMERIC(10, 2),
+  discount_amount NUMERIC(10, 2),
+  total_amount NUMERIC(10, 2),
+  status TEXT,
+  created_at TIMESTAMPTZ,
+  order_items JSONB
+)
+LANGUAGE plpgsql
+SECURITY DEFINER
+STABLE
+SET search_path = public, pg_temp
+AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    o.id AS order_id,
+    o.order_reference,
+    o.razorpay_order_id,
+    o.delivery_address,
+    o.subtotal,
+    o.shipping_fee,
+    o.discount_amount,
+    o.total_amount,
+    o.status,
+    o.created_at,
+    COALESCE(
+      (
+        SELECT jsonb_agg(
+          jsonb_build_object(
+            'product_name', oi.product_name,
+            'unit_price', oi.unit_price,
+            'quantity', oi.quantity,
+            'line_total', oi.line_total
+          )
+        )
+        FROM public.order_items oi
+        WHERE oi.order_id = o.id
+      ),
+      '[]'::jsonb
+    ) AS order_items
+  FROM public.orders o
+  WHERE o.order_reference = p_order_reference
+    AND o.guest_token = p_guest_token
+    AND o.customer_id IS NULL;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.get_guest_order(TEXT, UUID) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.get_guest_order(TEXT, UUID) TO anon, authenticated, service_role;
+
+-- ==============================================================================
+-- 9. CONTROLLED ATOMIC CHECKOUT FUNCTION
+-- ==============================================================================
 -- Validates active products, checks positive quantity, locks inventory (FOR UPDATE in sorted order),
 -- prevents overselling (rejects 0 stock), calculates subtotal/total server-side,
 -- and inserts orders + order_items atomically.

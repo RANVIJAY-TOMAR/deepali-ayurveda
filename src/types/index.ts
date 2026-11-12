@@ -7,6 +7,7 @@ export interface KeyIngredient {
 
 export interface Product {
   id: string;
+  slug?: string;
   name: string;
   sanskritName?: string;
   subName: string;
@@ -16,6 +17,8 @@ export interface Product {
   rating: number;
   reviewCount: number;
   inStock: boolean;
+  stockQuantity?: number;
+  isActive?: boolean;
   tag: string;
   badgeColor: string;
   volume: string;

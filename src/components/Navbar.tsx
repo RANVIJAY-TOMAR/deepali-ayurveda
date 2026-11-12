@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ShoppingBag, 
-  Search, 
-  Menu, 
-  X, 
-  Heart, 
-  Leaf, 
-  Sparkles, 
-  PhoneCall, 
+import {
+  ShoppingBag,
+  Search,
+  Menu,
+  X,
+  Heart,
+  Leaf,
+  Sparkles,
+  PhoneCall,
   ArrowRight,
   ShieldCheck,
   ChevronRight
 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
-import { 
-  BRAND_NAME, 
-  BRAND_ESTABLISHED, 
-  BRAND_SUPPORT_PHONE, 
-  VAIDYA_CONSULTATION_FEE, 
-  PRODUCTS 
+import {
+  BRAND_NAME,
+  BRAND_ESTABLISHED,
+  BRAND_SUPPORT_PHONE,
+  VAIDYA_CONSULTATION_FEE
 } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 import { formatPrice } from '../lib/format';
 
 interface NavbarProps {
@@ -33,6 +33,7 @@ interface NavbarProps {
 export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) {
   const { totalItems, setIsDrawerOpen } = useCart();
   const { wishlistCount } = useWishlist();
+  const { products } = useProducts();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -64,11 +65,11 @@ export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) 
   ];
 
   const searchResults = searchQuery.trim()
-    ? PRODUCTS.filter(p => 
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.symptoms.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()))
-      )
+    ? products.filter(p =>
+      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.symptoms.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()))
+    )
     : [];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -90,7 +91,7 @@ export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) 
               Est. {BRAND_ESTABLISHED} • Unnao, Uttar Pradesh (River Ganga)
             </span>
           </div>
-          
+
           <div className="hidden sm:flex items-center gap-6 text-[10px] uppercase font-semibold">
             <span>Free Express Delivery Above ₹500</span>
             <span className="text-[#35251F]/40">•</span>
@@ -111,14 +112,13 @@ export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) 
 
       {/* Main Sticky Navbar */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          isScrolled
+        className={`sticky top-0 z-40 transition-all duration-300 ${isScrolled
             ? 'bg-[#35251F]/95 backdrop-blur-md shadow-premium border-b border-[#A7835E]/30 py-3 text-[#FBF8F2]'
             : 'bg-[#35251F] border-b border-[#49352B] py-4 text-[#FBF8F2]'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          
+
           {/* Logo & Brand Identity */}
           <Link to="/" className="flex items-center gap-3.5 group">
             <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-[#A7835E]/80 shadow-md group-hover:border-[#D8C3A5] transition-all bg-[#2A1D17] shrink-0 p-0.5">
@@ -147,9 +147,8 @@ export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) 
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative text-xs uppercase tracking-widest font-bold transition-colors py-1 ${
-                    isActive ? 'text-[#D8C3A5]' : 'text-[#F5EFE5]/80 hover:text-[#D8C3A5]'
-                  }`}
+                  className={`relative text-xs uppercase tracking-widest font-bold transition-colors py-1 ${isActive ? 'text-[#D8C3A5]' : 'text-[#F5EFE5]/80 hover:text-[#D8C3A5]'
+                    }`}
                 >
                   {link.name}
                   {isActive && (
@@ -165,7 +164,7 @@ export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) 
 
           {/* Right Header Actions */}
           <div className="flex items-center gap-2 sm:gap-4">
-            
+
             {/* Search Trigger */}
             <button
               onClick={() => setIsSearchOpen(true)}
@@ -338,7 +337,7 @@ export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) 
                   {searchResults.map((item) => (
                     <Link
                       key={item.id}
-                      to={`/product/${item.id}`}
+                      to={`/product/${item.slug || item.id}`}
                       onClick={() => setIsSearchOpen(false)}
                       className="flex items-center justify-between p-3 rounded-sm bg-white hover:bg-[#F5EFE5] border border-[#35251F]/10 transition group"
                     >

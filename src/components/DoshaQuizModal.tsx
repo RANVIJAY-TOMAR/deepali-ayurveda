@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Sparkles, ArrowRight, RefreshCw, CheckCircle2, ChevronRight } from 'lucide-react';
-import { PRODUCTS } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
+import { PRODUCT_SLUG_MAP } from '../lib/orders';
 import { formatPrice } from '../lib/format';
 
 const QUESTIONS = [
@@ -42,6 +43,7 @@ interface DoshaQuizModalProps {
 }
 
 export default function DoshaQuizModal({ isOpen, onClose }: DoshaQuizModalProps) {
+  const { products } = useProducts();
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [result, setResult] = useState<any>(null);
@@ -58,12 +60,17 @@ export default function DoshaQuizModal({ isOpen, onClose }: DoshaQuizModalProps)
     } else {
       const productIds = Object.values(updated);
       const uniqueIds = [...new Set(productIds)];
-      const recommendedProducts = PRODUCTS.filter((p) => uniqueIds.includes(p.id));
+      const recommendedProducts = products.filter((p) => {
+        return uniqueIds.some((targetId) => {
+          const canonical = PRODUCT_SLUG_MAP[targetId] || targetId;
+          return p.slug === canonical || p.id === targetId || p.slug === targetId;
+        });
+      });
 
       setResult({
         title: 'Diagnostic Profile Complete',
         description: 'Based on your reported physiological signals, our clinical herbology criteria indicates these targeted classical formulations:',
-        recommendations: recommendedProducts.length > 0 ? recommendedProducts : PRODUCTS.slice(0, 2)
+        recommendations: recommendedProducts.length > 0 ? recommendedProducts : products.slice(0, 2)
       });
     }
   };
@@ -74,23 +81,24 @@ export default function DoshaQuizModal({ isOpen, onClose }: DoshaQuizModalProps)
     setResult(null);
   };
 
-  const handleViewProduct = (productId: string) => {
+  const handleViewProduct = (prod: any) => {
     onClose();
-    navigate(`/product/${productId}`);
+    const targetSlug = prod.slug || prod.id;
+    navigate(`/product/${targetSlug}`);
   };
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 text-[#35251F]">
       {/* Backdrop */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-[#35251F]/70 backdrop-blur-xs" 
-        onClick={onClose} 
+        className="fixed inset-0 bg-[#35251F]/70 backdrop-blur-xs"
+        onClick={onClose}
       />
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -108,8 +116,8 @@ export default function DoshaQuizModal({ isOpen, onClose }: DoshaQuizModalProps)
               <p className="text-[11px] text-[#A7835E] uppercase tracking-wider font-bold">Root-Cause Classical Guidance</p>
             </div>
           </div>
-          <button 
-            onClick={onClose} 
+          <button
+            onClick={onClose}
             className="p-1.5 rounded-sm text-[#35251F]/60 hover:text-[#35251F] hover:bg-[#F5EFE5] transition cursor-pointer"
           >
             <X className="w-5 h-5" />
@@ -196,7 +204,7 @@ export default function DoshaQuizModal({ isOpen, onClose }: DoshaQuizModalProps)
                       </div>
                     </div>
                     <button
-                      onClick={() => handleViewProduct(prod.id)}
+                      onClick={() => handleViewProduct(prod)}
                       className="btn-bronze px-4 py-2 text-[11px] uppercase tracking-wider font-bold rounded-sm shrink-0 cursor-pointer shadow-premium"
                     >
                       View

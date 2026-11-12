@@ -3,26 +3,27 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, ArrowRight, CheckCircle2, ShieldCheck, Sparkles, PhoneCall } from 'lucide-react';
 import { formatPrice } from '../../lib/format';
-import { PRODUCTS, VAIDYA_CONSULTATION_FEE } from '../../data/products';
+import { VAIDYA_CONSULTATION_FEE } from '../../data/products';
+import { useProduct } from '../../hooks/useProducts';
 
 interface DaaruMuktiSpotlightProps {
   onOpenConsult?: () => void;
 }
 
 export default function DaaruMuktiSpotlight({ onOpenConsult }: DaaruMuktiSpotlightProps) {
-  const daaruMukti = PRODUCTS.find((p) => p.id === "daaru-mukti-powder");
+  const { product: daaruMukti } = useProduct('daaru-mukti-powder');
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="relative overflow-hidden rounded-sm bg-gradient-to-br from-[#29231F] via-[#35251F] to-[#49352B] text-[#FBF8F2] p-7 sm:p-14 shadow-lift border border-[#A7835E]/40">
-        
+
         {/* Subtle Ambient Radial Glow */}
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-[#A7835E]/15 blur-3xl pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
-          
+
           <div className="lg:col-span-8 space-y-5 text-left">
-            
+
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#49352B] text-[#D8C3A5] border border-[#A7835E]/40 text-xs font-bold uppercase tracking-wider">
               <Lock className="w-3.5 h-3.5 text-[#A7835E]" />
               <span>100% Plain Box Discreet Packaging Guaranteed</span>
@@ -66,7 +67,7 @@ export default function DaaruMuktiSpotlight({ onOpenConsult }: DaaruMuktiSpotlig
                 to="/product/daaru-mukti-powder"
                 className="btn-bronze px-7 py-3.5 rounded-sm text-xs uppercase tracking-widest font-bold shadow-lift flex items-center gap-2 cursor-pointer"
               >
-                <span>Order 1 Month Supply (₹1,100)</span>
+                <span>Order 1 Month Supply ({formatPrice(daaruMukti?.price ?? 1100)})</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
