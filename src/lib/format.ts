@@ -7,7 +7,7 @@ export const formatPrice = (amount: number) => {
 };
 
 export const FREE_SHIPPING_THRESHOLD = 500;
-export const STANDARD_SHIPPING_FEE = 60;
+export const STANDARD_SHIPPING_FEE = 100;
 
 export const calculateShipping = (subtotal: number) => {
   if (subtotal === 0) return 0;

@@ -21,6 +21,11 @@ const FAQS: FAQItem[] = [
     answer: "Orders placed before 3:00 PM IST are freshly packed and dispatched the very same day directly from our dispensary in Unnao, Uttar Pradesh. Deliveries to Metro cities (Delhi NCR, Lucknow, Kanpur, Mumbai, etc.) take 2 to 3 business days, while Tier-2 and Tier-3 locations take 3 to 5 business days with complete live SMS tracking."
   },
   {
+    category: "Payment & Delivery",
+    question: "Do you offer Cash on Delivery (COD), and what are the delivery charges?",
+    answer: "We do not provide Cash on Delivery (COD). All orders are 100% prepaid via secure online payment (UPI, Debit/Credit Cards, Net Banking) to ensure tamper-proof safety packaging and rapid dispatch from our Unnao dispensary. Pan-India shipping is 100% Free (Complimentary) for all orders of ₹500 or above. For orders below ₹500, a standard delivery fee of ₹100 is charged at checkout."
+  },
+  {
     category: "Usage & Administration",
     question: "How is Daaru Mukti Powder (1 Month Supply) taken?",
     answer: "Daaru Mukti Powder is formulated as a micro-pulverized natural herbal blend that does not alter the color or aroma of cooked food. It can easily be mixed into curries, dal, roti dough, tea, or milk, or consumed openly with lukewarm water twice daily. The 1 Month Supply is formulated to cover 30 days of continuous protocol."

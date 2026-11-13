@@ -229,57 +229,42 @@ export default function CheckoutPage() {
           <div className="bg-white p-6 sm:p-7 rounded-sm border border-[#35251F]/15 space-y-4 shadow-subtle card-luxury">
             <div className="flex items-center gap-2 pb-3 border-b border-[#35251F]/10">
               <span className="w-6 h-6 rounded-full bg-[#35251F] text-[#FBF8F2] text-xs font-bold flex items-center justify-center">2</span>
-              <h3 className="font-serif-luxury text-lg font-bold text-[#35251F]">Payment Preference</h3>
+              <h3 className="font-serif-luxury text-lg font-bold text-[#35251F]">Payment Method</h3>
             </div>
 
             <div className="space-y-3">
-              {/* Option 1: Standard Online / UPI */}
-              <label className={`p-4 rounded-sm border flex items-start gap-3 cursor-pointer transition ${
-                formData.paymentMethod === 'online'
-                  ? 'border-[#35251F] bg-[#F5EFE5]'
-                  : 'border-[#35251F]/15 hover:border-[#35251F]/40'
-              }`}>
+              {/* 100% Prepaid Online Payment */}
+              <div className="p-4 rounded-sm border border-[#35251F] bg-[#F5EFE5] flex items-start gap-3">
                 <input
                   type="radio"
                   name="paymentMethod"
                   value="online"
-                  checked={formData.paymentMethod === 'online'}
-                  onChange={() => setFormData({ ...formData, paymentMethod: 'online' })}
-                  className="mt-1"
+                  checked={true}
+                  readOnly
+                  className="mt-1 accent-[#35251F]"
                 />
-                <div className="space-y-1">
-                  <span className="text-xs font-bold text-[#35251F] block">
-                    Online Payment (UPI, Debit/Credit Card, Net Banking)
-                  </span>
+                <div className="space-y-1.5 flex-1">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <span className="text-xs font-bold text-[#35251F] block">
+                      100% Secure Online Payment (Prepaid)
+                    </span>
+                    <span className="px-2 py-0.5 text-[10px] uppercase tracking-wider font-semibold bg-[#49352B] text-[#FBF8F2] rounded-xs">
+                      UPI • Cards • NetBanking
+                    </span>
+                  </div>
                   <p className="text-[11px] text-[#35251F]/70 font-light">
-                    Protected by server-side verification and bank-grade encryption.
+                    Protected by 256-bit SSL encryption and instant gateway verification.
                   </p>
                 </div>
-              </label>
+              </div>
 
-              {/* Option 2: Cash on Delivery */}
-              <label className={`p-4 rounded-sm border flex items-start gap-3 cursor-pointer transition ${
-                formData.paymentMethod === 'cod'
-                  ? 'border-[#35251F] bg-[#F5EFE5]'
-                  : 'border-[#35251F]/15 hover:border-[#35251F]/40'
-              }`}>
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="cod"
-                  checked={formData.paymentMethod === 'cod'}
-                  onChange={() => setFormData({ ...formData, paymentMethod: 'cod' })}
-                  className="mt-1"
-                />
-                <div className="space-y-1">
-                  <span className="text-xs font-bold text-[#35251F] block">
-                    Cash on Delivery (COD)
-                  </span>
-                  <p className="text-[11px] text-[#35251F]/70 font-light">
-                    Pay in cash upon physical delivery at your doorstep.
-                  </p>
-                </div>
-              </label>
+              {/* Informational Notice: No Cash on Delivery */}
+              <div className="p-3 bg-[#FBF8F2] rounded-sm border border-[#35251F]/15 flex items-start gap-2.5 text-xs text-[#35251F]/80">
+                <ShieldCheck className="w-4 h-4 text-[#A7835E] shrink-0 mt-0.5" />
+                <p className="text-[11px] leading-relaxed">
+                  <strong>Notice:</strong> We do not provide Cash on Delivery (COD). All orders are prepared fresh and dispatched strictly following prepaid online confirmation to ensure tamper-proof safety seals directly from our Unnao dispensary.
+                </p>
+              </div>
             </div>
 
           </div>

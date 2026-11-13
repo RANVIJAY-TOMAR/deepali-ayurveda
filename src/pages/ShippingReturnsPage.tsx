@@ -81,14 +81,22 @@ export default function ShippingReturnsPage() {
           </div>
         </section>
 
-        {/* Section 3: Shipping Rates */}
+        {/* Section 3: Shipping Rates & Payment Policy */}
         <section className="bg-white p-8 rounded-sm border border-[#35251F]/15 shadow-sm space-y-3 card-luxury">
           <h2 className="font-serif-luxury text-xl font-bold text-[#35251F]">
-            3. Complimentary Delivery Threshold
+            3. Complimentary Delivery Threshold & Payment Terms
           </h2>
           <p>
-            All domestic orders with a basket value of <strong>₹500 or above</strong> qualify for <strong>Complimentary Pan-India Shipping</strong>. For orders below ₹500, a standard logistics fee of ₹60 is applied at checkout.
+            All domestic orders with a basket value of <strong>₹500 or above</strong> qualify for <strong>Complimentary Pan-India Shipping</strong>. For orders below ₹500, a standard delivery and shipment fee of <strong>₹100</strong> is applied at checkout.
           </p>
+          <div className="p-4 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/30 text-xs text-[#35251F] space-y-1">
+            <span className="font-bold block uppercase tracking-wider text-[#A7835E]">
+              100% Prepaid Orders Only (No Cash on Delivery):
+            </span>
+            <p className="font-light text-[#35251F]/80">
+              We do not provide Cash on Delivery (COD). All parcels are dispatched exclusively after secure online payment verification (UPI, Debit/Credit Cards, Net Banking) to guarantee untouched tamper-proof packaging and rapid dispatch from our Unnao dispensary.
+            </p>
+          </div>
         </section>
 
         {/* Section 4: Replacement Policy */}

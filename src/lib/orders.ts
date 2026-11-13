@@ -153,6 +153,11 @@ export function validateCheckoutForm(
     }
   }
 
+  // 9. Payment method validation: Only online prepaid payment is permitted (no Cash on Delivery)
+  if (formData.paymentMethod && formData.paymentMethod.toLowerCase() === 'cod') {
+    errors.paymentMethod = 'Cash on Delivery is not available. Please choose secure online payment.';
+  }
+
   return {
     isValid: Object.keys(errors).length === 0,
     errors

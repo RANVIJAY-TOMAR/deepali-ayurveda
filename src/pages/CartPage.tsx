@@ -14,7 +14,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { formatPrice } from '../lib/format';
+import { formatPrice, FREE_SHIPPING_THRESHOLD } from '../lib/format';
 
 export default function CartPage() {
   const {
@@ -46,9 +46,8 @@ export default function CartPage() {
     }
   };
 
-  const freeShippingThreshold = 500;
-  const progressPercent = Math.min(100, Math.round((subtotal / freeShippingThreshold) * 100));
-  const amountNeeded = freeShippingThreshold - subtotal;
+  const progressPercent = Math.min(100, Math.round((subtotal / FREE_SHIPPING_THRESHOLD) * 100));
+  const amountNeeded = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
 
   if (items.length === 0) {
     return (

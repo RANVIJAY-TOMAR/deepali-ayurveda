@@ -91,6 +91,7 @@ function validateForm(formData, items) {
   if (!formData.state || formData.state.trim().length < 2) errors.state = 'Required';
   if (!formData.pincode || !/^[0-9]{6}$/.test(formData.pincode.trim())) errors.pincode = '6 digits';
   if (!items || items.length === 0) errors.items = 'Cart empty';
+  if (formData.paymentMethod && formData.paymentMethod.toLowerCase() === 'cod') errors.paymentMethod = 'No COD';
   return { isValid: Object.keys(errors).length === 0, errors };
 }
 
@@ -110,8 +111,12 @@ assert(!r3.isValid && r3.errors.pincode !== undefined, 'UNIT TEST', 'Rejects pos
 const r4 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801' }, []);
 assert(!r4.isValid && r4.errors.items !== undefined, 'UNIT TEST', 'Rejects checkout submission when cart basket is empty');
 
-// 2e. Accept fully valid form
-const r5 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', email: 'ramesh@example.com', address: 'House 14, Ganga Barrage Road', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801' }, [{ productId: 'daaru-mukti-powder', quantity: 1 }]);
+// 2e. Reject Cash on Delivery (only online prepaid accepted)
+const r6 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801', paymentMethod: 'cod' }, [{ productId: 'daaru-mukti-powder', quantity: 1 }]);
+assert(!r6.isValid && r6.errors.paymentMethod !== undefined, 'UNIT TEST', 'Rejects Cash on Delivery (only online prepaid accepted)');
+
+// 2f. Accept fully valid form
+const r5 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', email: 'ramesh@example.com', address: 'House 14, Ganga Barrage Road', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801', paymentMethod: 'online' }, [{ productId: 'daaru-mukti-powder', quantity: 1 }]);
 assert(r5.isValid, 'UNIT TEST', 'Accepts valid checkout form meeting database constraints');
 
 // ==============================================================================
@@ -154,7 +159,7 @@ function simulateSubmitCheckout(deliveryAddress, items, customerId = null) {
     });
   }
 
-  const shippingFee = subtotal >= 500 ? 0 : 60;
+  const shippingFee = subtotal >= 500 ? 0 : 100;
   const discountAmount = 0;
   const totalAmount = subtotal - discountAmount + shippingFee;
   const orderReference = `DA-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -185,6 +190,15 @@ assert(validOrder.subtotal === 2200.00, 'MOCKED TEST', 'Authoritative subtotal c
 assert(validOrder.shipping_fee === 0, 'MOCKED TEST', 'Zero logistics fee applied for orders meeting free shipping threshold (>= ₹500)');
 assert(validOrder.order_reference.startsWith('DA-'), 'MOCKED TEST', 'Order reference follows authoritative DA-YYYY-XXXXX format');
 assert(validOrder.guest_token !== null, 'MOCKED TEST', 'Server generates 128-bit unguessable guest_token for unauthenticated customer');
+
+// 3b. Orders below ₹500 threshold charge standard ₹100 shipping fee
+const smallOrder = simulateSubmitCheckout(
+  { full_name: 'Test Customer', phone: '9140086856', address_line1: 'Ganga Ghat', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801' },
+  [{ product_id: '55555555-5555-5555-5555-555555555555', quantity: 1 }] // Digest Guru: ₹199 (< ₹500)
+);
+assert(smallOrder.subtotal === 199.00, 'MOCKED TEST', 'Small order subtotal calculated as ₹199 (< ₹500)');
+assert(smallOrder.shipping_fee === 100.00, 'MOCKED TEST', '₹100 shipping fee applied for orders below ₹500 threshold');
+assert(smallOrder.total_amount === 299.00, 'MOCKED TEST', 'Total amount correctly reflects subtotal (₹199) + shipping (₹100) = ₹299');
 
 // 4a. Insufficient stock rejection
 let stockErrorThrown = false;
