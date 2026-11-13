@@ -88,7 +88,7 @@ export default function DaaruMuktiSpotlight({ onOpenConsult }: DaaruMuktiSpotlig
             <div className="p-5 bg-[#49352B] rounded-sm border border-[#A7835E]/30 text-center space-y-3 max-w-xs w-full shadow-premium">
               <div className="h-48 rounded-xs overflow-hidden bg-[#241A16] flex items-center justify-center p-3">
                 <img
-                  src="/images/products/daaru-mukti-powder.png"
+                  src="/images/products/daaru-mukti-powder.png?v=20261113"
                   alt="Daaru Mukti 30 Daily Sachets (1 Month Supply)"
                   className="w-full h-full object-contain drop-shadow-md"
                 />

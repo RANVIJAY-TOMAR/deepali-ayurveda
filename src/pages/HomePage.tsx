@@ -187,7 +187,7 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
               <div className="relative bg-[#49352B] p-5 rounded-sm border border-[#A7835E]/40 text-center space-y-4 max-w-sm w-full shadow-premium">
                 <div className="aspect-square rounded-sm overflow-hidden bg-[#241A16] flex items-center justify-center p-4">
                   <img
-                    src="/images/products/daaru-mukti-powder.png"
+                    src="/images/products/daaru-mukti-powder.png?v=20261113"
                     alt="Daaru Mukti 30 Daily Sachets (1 Month Supply)"
                     className="w-full h-full object-contain drop-shadow-md"
                   />
@@ -241,11 +241,11 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
                 to={`/categories/${cat.id}`}
                 className="group bg-white border border-[#35251F]/15 rounded-sm overflow-hidden flex flex-col justify-between card-luxury block h-full hover:border-[#A7835E]"
               >
-                <div className="aspect-[4/3] bg-[#F5EFE5] overflow-hidden img-zoom-container">
+                <div className="aspect-[4/3] bg-[#FAF6EE] overflow-hidden img-zoom-container flex items-center justify-center p-6 group-hover:bg-[#F2ECE1] transition-colors">
                   <img
                     src={cat.image}
                     alt={cat.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-105 drop-shadow-sm"
                   />
                 </div>
 

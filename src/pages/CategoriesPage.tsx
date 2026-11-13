@@ -83,21 +83,30 @@ export default function CategoriesPage() {
 
         {/* Active Category Description Panel */}
         {currentCategory && (
-          <div className="p-6 bg-white rounded-sm border border-[#35251F]/15 space-y-2 card-luxury text-left">
-            <span className="text-xs uppercase tracking-widest text-[#A7835E] font-bold">
-              {currentCategory.badge}
-            </span>
-            <h3 className="font-serif-luxury text-2xl font-bold text-[#35251F]">
-              {currentCategory.title}
-            </h3>
-            {currentCategory.hindiTitle && (
-              <span className="text-sm font-hindi-luxury text-[#725543] font-medium block">
-                {currentCategory.hindiTitle}
+          <div className="p-6 bg-white rounded-sm border border-[#35251F]/15 flex flex-col sm:flex-row items-center gap-6 card-luxury text-left">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 bg-[#FAF6EE] rounded-sm p-2 border border-[#35251F]/10 flex items-center justify-center">
+              <img
+                src={currentCategory.image}
+                alt={currentCategory.title}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="space-y-1.5 flex-1">
+              <span className="text-xs uppercase tracking-widest text-[#A7835E] font-bold">
+                {currentCategory.badge}
               </span>
-            )}
-            <p className="text-xs sm:text-sm text-[#35251F]/80 leading-relaxed font-light pt-1">
-              {currentCategory.description}
-            </p>
+              <h3 className="font-serif-luxury text-2xl font-bold text-[#35251F]">
+                {currentCategory.title}
+              </h3>
+              {currentCategory.hindiTitle && (
+                <span className="text-sm font-hindi-luxury text-[#725543] font-medium block">
+                  {currentCategory.hindiTitle}
+                </span>
+              )}
+              <p className="text-xs sm:text-sm text-[#35251F]/80 leading-relaxed font-light pt-1">
+                {currentCategory.description}
+              </p>
+            </div>
           </div>
         )}
 

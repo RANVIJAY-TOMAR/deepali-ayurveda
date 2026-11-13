@@ -31,7 +31,7 @@ export const CATEGORY_DETAILS = [
     title: "Ayurvedic Medicines",
     hindiTitle: "शास्त्रीय औषधियाँ",
     description: "Classical Shastriya formulations prepared following authentic Ayurvedic texts to address chronic bodily imbalances, de-addiction recovery, and deep tissue rejuvenation.",
-    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80",
+    image: "/images/products/daaru-mukti-powder.png?v=20261113",
     badge: "Classical Shastriya Standards",
     productCount: 1
   },
@@ -40,7 +40,7 @@ export const CATEGORY_DETAILS = [
     title: "Herbal Formulations",
     hindiTitle: "प्राकृतिक जड़ी-बूटी योग",
     description: "Whole-plant nutraceuticals replenishing essential micronutrients, cellular antioxidants, and nerve vitality without chemical isolates.",
-    image: "https://images.unsplash.com/photo-1570283988059-af8412f4fe91?auto=format&fit=crop&w=800&q=80",
+    image: "/images/products/vitamin-b12.png?v=20261113",
     badge: "100% Plant Synergy",
     productCount: 2
   },
@@ -49,7 +49,7 @@ export const CATEGORY_DETAILS = [
     title: "Digestive Wellness",
     hindiTitle: "पाचन एवं जठराग्नि कल्याण",
     description: "Time-tested herbal blends that kindle Jatharagni (digestive fire), clear metabolic toxins (Ama), and restore harmony to the gut-brain axis.",
-    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80",
+    image: "/images/products/digest-guru-churan.png?v=20261113",
     badge: "Gut-Brain Restoration",
     productCount: 2
   }
@@ -219,7 +219,7 @@ export const PRODUCTS = [
       "100% Plain Box Discreet Packaging Guarantee"
     ],
 
-    image: "/images/products/daaru-mukti-powder.png",
+    image: "/images/products/daaru-mukti-powder.png?v=20261113",
     colorScheme: "bronze"
   },
   {
@@ -305,7 +305,7 @@ export const PRODUCTS = [
       "Pure Veg Capsules"
     ],
 
-    image: "/images/products/vitamin-b12.png",
+    image: "/images/products/vitamin-b12.png?v=20261113",
     colorScheme: "bronze"
   },
   {
@@ -376,7 +376,7 @@ export const PRODUCTS = [
       "AYUSH & FSSAI Compliant Standards"
     ],
 
-    image: "/images/products/sea-buckthorn.png",
+    image: "/images/products/sea-buckthorn.png?v=20261113",
     colorScheme: "bronze"
   },
   {
@@ -446,7 +446,7 @@ export const PRODUCTS = [
       "Non-GMO & Vegan Formulation"
     ],
 
-    image: "/images/products/apple-cider-vinegar.png",
+    image: "/images/products/apple-cider-vinegar.png?v=20261113",
     colorScheme: "bronze"
   },
   {
@@ -530,7 +530,7 @@ export const PRODUCTS = [
       "Free of Sugar & Harmful Binders"
     ],
 
-    image: "/images/products/digest-guru-churan.png",
+    image: "/images/products/digest-guru-churan.png?v=20261113",
     colorScheme: "bronze"
   }
 ];

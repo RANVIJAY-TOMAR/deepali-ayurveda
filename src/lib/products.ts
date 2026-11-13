@@ -61,7 +61,10 @@ export function mergeDatabaseProductWithMetadata(dbProduct: DatabaseProductRow):
     inStock,
     isActive: dbProduct.is_active,
     category: dbProduct.category || meta?.category || 'All Products',
-    image: dbProduct.image_url || meta?.image || '/images/products/daaru-mukti-powder.png',
+    image: (() => {
+      const raw = dbProduct.image_url || meta?.image || '/images/products/daaru-mukti-powder.png';
+      return raw.includes('?') ? raw : `${raw}?v=20261113`;
+    })(),
     sanskritName: dbProduct.sanskrit_name || meta?.sanskritName || undefined,
     volume: dbProduct.volume || meta?.volume || '',
     serving: dbProduct.serving || meta?.serving || undefined,
