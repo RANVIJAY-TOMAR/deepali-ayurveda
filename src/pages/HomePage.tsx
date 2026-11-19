@@ -269,36 +269,6 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
         </div>
       </section>
 
-      {/* 5. APOTHECARY STOREFRONT */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-[#35251F]/15 pb-6">
-          <div className="space-y-1 text-left">
-            <span className="text-xs uppercase tracking-widest text-[#A7835E] font-bold block mb-1">
-              Official Storefront
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-bold font-serif-luxury text-[#35251F] tracking-tight">
-              Flagship Formulation
-            </h2>
-          </div>
-          <Link
-            to="/shop"
-            className="text-xs uppercase tracking-widest font-bold text-[#35251F] hover:text-[#A7835E] transition inline-flex items-center gap-2"
-          >
-            <span>View Full Formulation Details</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <div className="max-w-md mx-auto">
-          {loading ? (
-            <ProductCardSkeleton count={1} />
-          ) : (
-            products.slice(0, 1).map((product, idx) => (
-              <ProductCard key={product.id} product={product} index={idx} />
-            ))
-          )}
-        </div>
-      </section>
 
       {/* 6. OUR HERITAGE & ROOTS IN UNNAO ON RIVER GANGA (EST. 1997) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
