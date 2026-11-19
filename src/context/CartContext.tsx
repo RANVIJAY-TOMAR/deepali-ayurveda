@@ -7,7 +7,20 @@ export const CartProvider = ({ children }) => {
   const [items, setItems] = useState(() => {
     try {
       const saved = localStorage.getItem('deepali_ayurveda_cart');
-      return saved ? JSON.parse(saved) : [];
+      if (!saved) return [];
+      const parsed = JSON.parse(saved);
+      // Strictly cleanse any legacy products; keep only active single product Sea Buckthorn
+      const valid = Array.isArray(parsed)
+        ? parsed.filter(item => {
+            const pid = item?.product?.id || item?.product?.slug || '';
+            return pid === 'sea-buckthorn';
+          })
+        : [];
+      // Clean stale storage immediately
+      if (Array.isArray(parsed) && parsed.length !== valid.length) {
+        localStorage.setItem('deepali_ayurveda_cart', JSON.stringify(valid));
+      }
+      return valid;
     } catch {
       return [];
     }

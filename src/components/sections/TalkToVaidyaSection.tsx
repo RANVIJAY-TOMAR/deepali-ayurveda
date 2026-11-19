@@ -160,7 +160,7 @@ export default function TalkToVaidyaSection({ onOpenModal }: TalkToVaidyaSection
                       type="text"
                       value={formData.healthConcern}
                       onChange={(e) => setFormData({ ...formData, healthConcern: e.target.value })}
-                      placeholder="e.g. Alcohol urges, digestion, daily fatigue..."
+                      placeholder="e.g. Daily fatigue, cellular vitality, skin health, digestion..."
                       className="w-full px-3.5 py-2.5 text-xs rounded-sm bg-[#35251F] border border-[#A7835E]/30 text-[#FBF8F2] placeholder-[#D8C3A5]/40 focus:outline-none focus:border-[#A7835E]"
                     />
                   </div>

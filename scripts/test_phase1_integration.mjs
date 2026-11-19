@@ -96,15 +96,15 @@ function validateForm(formData, items) {
 }
 
 // 2a. Reject short name
-const r1 = validateForm({ fullName: 'A', phone: '9140086856', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801' }, [{ productId: 'daaru-mukti-powder', quantity: 1 }]);
+const r1 = validateForm({ fullName: 'A', phone: '9140086856', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801' }, [{ productId: 'sea-buckthorn', quantity: 1 }]);
 assert(!r1.isValid && r1.errors.fullName !== undefined, 'UNIT TEST', 'Rejects customer name shorter than 2 characters');
 
 // 2b. Reject invalid phone
-const r2 = validateForm({ fullName: 'Ramesh Verma', phone: '12345', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801' }, [{ productId: 'daaru-mukti-powder', quantity: 1 }]);
+const r2 = validateForm({ fullName: 'Ramesh Verma', phone: '12345', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801' }, [{ productId: 'sea-buckthorn', quantity: 1 }]);
 assert(!r2.isValid && r2.errors.phone !== undefined, 'UNIT TEST', 'Rejects phone number shorter than 10 digits or non-matching regex');
 
 // 2c. Reject invalid pincode
-const r3 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '20980' }, [{ productId: 'daaru-mukti-powder', quantity: 1 }]);
+const r3 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '20980' }, [{ productId: 'sea-buckthorn', quantity: 1 }]);
 assert(!r3.isValid && r3.errors.pincode !== undefined, 'UNIT TEST', 'Rejects postal PIN code that is not exactly 6 digits');
 
 // 2d. Reject empty cart
@@ -112,11 +112,11 @@ const r4 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', address
 assert(!r4.isValid && r4.errors.items !== undefined, 'UNIT TEST', 'Rejects checkout submission when cart basket is empty');
 
 // 2e. Reject Cash on Delivery (only online prepaid accepted)
-const r6 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801', paymentMethod: 'cod' }, [{ productId: 'daaru-mukti-powder', quantity: 1 }]);
+const r6 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', address: 'Mohalla Ganga Kinare', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801', paymentMethod: 'cod' }, [{ productId: 'sea-buckthorn', quantity: 1 }]);
 assert(!r6.isValid && r6.errors.paymentMethod !== undefined, 'UNIT TEST', 'Rejects Cash on Delivery (only online prepaid accepted)');
 
 // 2f. Accept fully valid form
-const r5 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', email: 'ramesh@example.com', address: 'House 14, Ganga Barrage Road', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801', paymentMethod: 'online' }, [{ productId: 'daaru-mukti-powder', quantity: 1 }]);
+const r5 = validateForm({ fullName: 'Ramesh Verma', phone: '9140086856', email: 'ramesh@example.com', address: 'House 14, Ganga Barrage Road', city: 'Unnao', state: 'Uttar Pradesh', pincode: '209801', paymentMethod: 'online' }, [{ productId: 'sea-buckthorn', quantity: 1 }]);
 assert(r5.isValid, 'UNIT TEST', 'Accepts valid checkout form meeting database constraints');
 
 // ==============================================================================
@@ -125,7 +125,7 @@ assert(r5.isValid, 'UNIT TEST', 'Accepts valid checkout form meeting database co
 console.log(`\n${BOLD}3 & 4. [MOCKED TEST] In-Memory Checkout Simulation & Stock Control...${RESET}`);
 
 const mockDatabaseCatalog = [
-  { id: '11111111-1111-1111-1111-111111111111', name: 'Daaru Mukti Powder', slug: 'daaru-mukti-powder', price: 1100.00, stock_quantity: 50, is_active: true },
+  { id: '11111111-1111-1111-1111-111111111111', name: 'Sea Buckthorn (Leh Berry)', slug: 'sea-buckthorn', price: 1100.00, stock_quantity: 50, is_active: true },
   { id: '22222222-2222-2222-2222-222222222222', name: 'B12', slug: 'b12', price: 599.00, stock_quantity: 20, is_active: true },
   { id: '33333333-3333-3333-3333-333333333333', name: 'Sea Buckthorn', slug: 'sea-buckthorn', price: 599.00, stock_quantity: 0, is_active: true }, // Out of stock
   { id: '44444444-4444-4444-4444-444444444444', name: 'Apple Cider Vinegar', slug: 'apple-cider-vinegar', price: 293.00, stock_quantity: 15, is_active: true },

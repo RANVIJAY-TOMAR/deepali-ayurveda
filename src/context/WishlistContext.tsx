@@ -14,7 +14,15 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   const [wishlist, setWishlist] = useState<Product[]>(() => {
     try {
       const saved = localStorage.getItem('deepali_wishlist');
-      return saved ? JSON.parse(saved) : [];
+      if (!saved) return [];
+      const parsed = JSON.parse(saved);
+      const valid = Array.isArray(parsed)
+        ? parsed.filter((p: Product) => (p?.id === 'sea-buckthorn' || p?.slug === 'sea-buckthorn'))
+        : [];
+      if (Array.isArray(parsed) && parsed.length !== valid.length) {
+        localStorage.setItem('deepali_wishlist', JSON.stringify(valid));
+      }
+      return valid;
     } catch {
       return [];
     }

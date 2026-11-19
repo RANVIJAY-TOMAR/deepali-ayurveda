@@ -167,7 +167,7 @@ export default function DoctorConsultModal({ isOpen, onClose }: DoctorConsultMod
                 rows={2}
                 value={formData.concern}
                 onChange={(e) => setFormData({ ...formData, concern: e.target.value })}
-                placeholder="Briefly state your concern (e.g. alcohol recovery, digestion, vitamin deficiency)..."
+                placeholder="Briefly state your concern (e.g. daily immunity, skin health, vitality, digestion)..."
                 className="w-full px-4 py-2.5 text-xs rounded-sm border border-[#35251F]/20 bg-white focus:outline-none focus:border-[#A7835E]"
               />
             </div>

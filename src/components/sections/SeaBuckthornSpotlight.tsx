@@ -9,7 +9,7 @@ interface SpotlightProps {
   onOpenConsult?: () => void;
 }
 
-export default function DaaruMuktiSpotlight({ onOpenConsult }: SpotlightProps) {
+export default function SeaBuckthornSpotlight({ onOpenConsult }: SpotlightProps) {
   const { product: seaBuckthorn } = useProduct('sea-buckthorn');
 
   return (

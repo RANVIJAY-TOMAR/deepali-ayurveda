@@ -54,7 +54,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <p className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-[#A7835E] shrink-0" />
-              <span>Zero external labeling regarding remedy names, addiction recovery, or medical conditions on the outer parcel label.</span>
+              <span>Zero external labeling regarding remedy names or health indications on the outer parcel label.</span>
             </p>
             <p className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-[#A7835E] shrink-0" />
