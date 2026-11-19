@@ -7,9 +7,9 @@ export default function WhatsAppButton() {
 
   const quickInquiries = [
     {
-      title: "Enquire about Daaru Mukti Powder",
-      desc: "1 Month Supply & plain box packaging questions",
-      text: "Hello Deepali Ayurveda, I would like to enquire about Daaru Mukti Powder (1 Month Supply) and discreet plain box packaging."
+      title: "Enquire about Sea Buckthorn (500 ML)",
+      desc: "99% Pure Pulp Daily Health Shot & Free PAN-India Delivery",
+      text: "Hello Deepali Ayurveda, I would like to enquire about Sea Buckthorn 99% Pure Pulp (500 ML) and Free Delivery PAN India."
     },
     {
       title: "Ayurvedic Formulation Guidance",

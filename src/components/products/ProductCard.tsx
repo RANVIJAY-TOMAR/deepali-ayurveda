@@ -19,7 +19,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const isFavorite = isInWishlist(product.id);
-  const isDaaruMukti = product.slug === 'daaru-mukti-powder' || product.id === 'daaru-mukti-powder';
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -61,11 +60,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               </span>
             )}
 
-            {isDaaruMukti ? (
-              <span className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-[#35251F] text-[#FBF8F2] border border-[#A7835E]/60 rounded-xs shadow-xs pointer-events-auto">
-                ★ 1 Month Supply
-              </span>
-            ) : product.tag ? (
+            {product.tag ? (
               <span className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-[#F5EFE5] text-[#35251F] border border-[#D8C3A5] rounded-xs shadow-xs pointer-events-auto">
                 {product.tag.split('•')[0]}
               </span>
@@ -121,13 +116,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               </h3>
             </Link>
 
-            {/* Short Benefit or 1 Month Supply highlight */}
-            {isDaaruMukti && (
-              <p className="text-xs font-semibold text-[#A7835E]">
-                30 Daily Sachets (1 Sachet/Day) • 1 Month Supply
-              </p>
-            )}
-
             {/* Symptoms Tags or Sanskrit Subtitle */}
             {product.sanskritName && (
               <p className="text-xs text-[#725543] font-hindi-luxury line-clamp-1 font-medium">
@@ -161,11 +149,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
                 )}
               </div>
               
-              {isDaaruMukti && (
-                <span className="text-[10px] font-bold text-[#A7835E] uppercase tracking-wider">
-                  1 Mo. Course
-                </span>
-              )}
+              <span className="text-[10px] font-bold text-[#A7835E] uppercase tracking-wider">
+                Free Delivery PAN India
+              </span>
             </div>
 
             {/* Quick Add To Basket Button */}

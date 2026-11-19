@@ -12,28 +12,28 @@ interface FAQItem {
 const FAQS: FAQItem[] = [
   {
     category: "Discreet Packaging",
-    question: "Is the outer packaging 100% plain and confidential for sensitive remedies like Daaru Mukti?",
-    answer: "Yes, absolutely. We guarantee 100% plain box discreet packaging. All parcels are dispatched in sturdy, unbranded, opaque brown cardboard boxes sealed with tamper-evident security tape. The exterior shipping label only indicates your address and our registered sender name 'Deepali Apothecary Logistics'—with ZERO mention of alcohol, addiction, or specific product names."
+    question: "Is the outer packaging 100% secure and tamper-proof?",
+    answer: "Yes, absolutely. All parcels are dispatched in sturdy, unbranded, opaque brown cardboard boxes sealed with tamper-evident security tape. The exterior shipping label only indicates your address and our registered sender name 'Deepali Apothecary Logistics'."
   },
   {
     category: "Delivery & Dispatch",
     question: "How quickly are orders dispatched from your Unnao dispensary?",
-    answer: "Orders placed before 3:00 PM IST are freshly packed and dispatched the very same day directly from our dispensary in Unnao, Uttar Pradesh. Deliveries to Metro cities (Delhi NCR, Lucknow, Kanpur, Mumbai, etc.) take 2 to 3 business days, while Tier-2 and Tier-3 locations take 3 to 5 business days with complete live SMS tracking."
+    answer: "Orders placed before 3:00 PM IST are freshly packed and dispatched the very same day directly from our dispensary in Unnao, Uttar Pradesh. Deliveries to Metro cities take 2 to 3 business days, while Tier-2 and Tier-3 locations take 3 to 5 business days with complete live SMS tracking."
   },
   {
     category: "Payment & Delivery",
     question: "Do you offer Cash on Delivery (COD), and what are the delivery charges?",
-    answer: "We do not provide Cash on Delivery (COD). All orders are 100% prepaid via secure online payment (UPI, Debit/Credit Cards, Net Banking) to ensure tamper-proof safety packaging and rapid dispatch from our Unnao dispensary. Pan-India shipping is 100% Free (Complimentary) for all orders of ₹500 or above. For orders below ₹500, a standard delivery fee of ₹100 is charged at checkout."
+    answer: "We do not provide Cash on Delivery (COD). All orders are 100% prepaid via secure online payment (UPI, Debit/Credit Cards, Net Banking) to ensure tamper-proof safety packaging and rapid dispatch from our Unnao dispensary. Delivery is 100% Free (Complimentary) PAN India across all pincodes!"
   },
   {
     category: "Usage & Administration",
-    question: "How is Daaru Mukti Powder (1 Month Supply) taken?",
-    answer: "Daaru Mukti Powder is formulated as a micro-pulverized natural herbal blend that does not alter the color or aroma of cooked food. It can easily be mixed into curries, dal, roti dough, tea, or milk, or consumed openly with lukewarm water twice daily. The 1 Month Supply is formulated to cover 30 days of continuous protocol."
+    question: "How is Deepali Ayurveda Sea Buckthorn 99% Pure Pulp taken?",
+    answer: "Take 20ml to 30ml diluted in equal parts lukewarm water, or consume it directly as an invigorating daily health shot first thing in the morning on an empty stomach. Shake well before each use. A 500 ML bottle serves as your comprehensive daily health shot course."
   },
   {
-    category: "Quality Standards",
-    question: "Are your formulations heavy-metal tested and approved under AYUSH guidelines?",
-    answer: "Every single formulation is compliant with AYUSH guidelines and compounded under cleanroom conditions. Every batch is independently tested to verify complete absence of Lead, Mercury, Arsenic, microbial pathogens, and synthetic steroids."
+    category: "Quality Standards & Certifications",
+    question: "Why should I trust Deepali Ayurveda? What certifications do you hold?",
+    answer: "Deepali Ayurveda is officially MSME Certified, FSSAI Certified, AYUSH Certified, ISO 9001:2015 Certified, and GMP Certified. Furthermore, every production batch of our Himalayan Sea Buckthorn 99% Pure Pulp is independently 100% Lab Tested to guarantee complete absence of Lead, Mercury, Arsenic, microbial pathogens, synthetic fillers, added sugar, or chemical preservatives."
   },
   {
     category: "Vaidya Consultation",

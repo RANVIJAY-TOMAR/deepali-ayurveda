@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, ShieldCheck, Award, Lock, Sparkles, Clock, Leaf, PhoneCall } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Award, Lock, Sparkles, Clock, Leaf, PhoneCall, Truck } from 'lucide-react';
 import { 
   BRAND_NAME, 
   BRAND_ESTABLISHED, 
@@ -13,8 +13,8 @@ import {
 
 const TRUST_CREDENTIALS = [
   { title: "Est. 1997 Unnao", desc: "Rooted along the sacred River Ganga", icon: Award },
-  { title: "100% Classical Kwath", desc: "Zero synthetic chemicals or isolates", icon: Leaf },
-  { title: "100% Plain Box Delivery", desc: "Discreet unbranded packaging guaranteed", icon: Lock },
+  { title: "99% Pure Pulp", desc: "Zero added sugar or preservatives", icon: Leaf },
+  { title: "Free Delivery PAN India", desc: "Complimentary shipping on all orders", icon: Truck },
   { title: "Talk to a Vaidya (₹200)", desc: "Personal consultation over a call", icon: PhoneCall },
 ];
 
@@ -88,7 +88,7 @@ export default function CinematicHero() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="text-base sm:text-lg text-[#35251F]/85 font-light leading-relaxed max-w-2xl"
             >
-              For over 29 years, <strong>{BRAND_NAME}</strong> has formulated classical Shastriya preparations directly from pure whole botanicals in Unnao, Uttar Pradesh. From our flagship <strong>1 Month Supply Daaru Mukti Powder</strong> to cellular nutritional tonics, experience authentic Ayurveda untouched by synthetic isolates.
+              For over 29 years, <strong>{BRAND_NAME}</strong> has formulated classical Shastriya preparations directly from pure whole botanicals in Unnao, Uttar Pradesh. Discover our flagship <strong>Himalayan Sea Buckthorn 99% Pure Pulp Daily Health Shot</strong>—packed with rare Omegas (3, 6, 7 & 9) and natural Vitamin C with Complimentary Free Delivery PAN India.
             </motion.p>
 
             {/* CTAs */}

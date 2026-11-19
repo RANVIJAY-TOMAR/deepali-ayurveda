@@ -30,7 +30,8 @@ import {
   BRAND_ADDRESS,
   BRAND_STORYLINE_GANGA,
   BRAND_STORYLINE_HERITAGE,
-  VAIDYA_CONSULTATION_FEE
+  VAIDYA_CONSULTATION_FEE,
+  WHY_TRUST_CREDENTIALS
 } from '../data/products';
 import { useProducts } from '../hooks/useProducts';
 import CinematicHero from '../components/hero/CinematicHero';
@@ -47,16 +48,11 @@ interface HomePageProps {
 export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
   const { products, loading } = useProducts();
 
-  // Flagship formulations for top showcase: Daaru Mukti (1 Month Supply), Plant B12, Digest Guru
-  const flagshipSlugs = ['daaru-mukti-powder', 'b12', 'digest-guru'];
+  // Flagship formulation: Sea Buckthorn 99% Pure Pulp (500 ML)
   const flagshipRemedies = products.filter((p) => 
-    flagshipSlugs.includes(p.slug || '') ||
-    ['daaru-mukti-powder', 'vitamin-b12-d3-k2-calcium', 'digest-guru-churan'].includes(p.id)
+    p.slug === 'sea-buckthorn' || p.id === 'sea-buckthorn'
   );
-
-  const daaruMuktiProduct = products.find(
-    (p) => p.slug === 'daaru-mukti-powder' || p.id === 'daaru-mukti-powder'
-  );
+  const displayRemedies = flagshipRemedies.length > 0 ? flagshipRemedies : products;
 
   const handleWhatsAppHelp = () => {
     const text = encodeURIComponent(`Hello Deepali Ayurveda, I would like consultation regarding your classical remedies.`);
@@ -75,38 +71,38 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
           <div className="space-y-2 text-left">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#A7835E] font-bold">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Curated Classical Formulations • Unnao Apothecary</span>
+              <span>Flagship Classical Formulation • Unnao Apothecary</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-bold font-serif-luxury text-[#35251F] tracking-tight leading-tight">
-              Featured Ayurvedic Remedies
+              Featured Ayurvedic Remedy
             </h2>
             <p className="text-sm sm:text-base text-[#35251F]/80 font-light max-w-xl">
-              Time-tested Shastriya recipes prepared in small batches using whole-plant extracts for physiological bio-availability.
+              Authentic Shastriya preparation crafted with 99% pure Himalayan berry pulp, rich natural Omegas (3, 6, 7 & 9), zero preservatives, and Free PAN-India Delivery.
             </p>
           </div>
 
           <Link
-            to="/shop"
+            to="/product/sea-buckthorn"
             className="btn-espresso px-6 py-3.5 rounded-sm text-xs uppercase tracking-widest font-semibold inline-flex items-center gap-2 group shrink-0"
           >
-            <span>VIEW ALL 5 PRODUCTS</span>
+            <span>ORDER SEA BUCKTHORN (₹699)</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#D8C3A5]" />
           </Link>
         </div>
 
-        {/* 3 Impressive Flagship Product Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Impressive Flagship Product Card */}
+        <div className="max-w-md mx-auto">
           {loading ? (
-            <ProductCardSkeleton count={3} />
+            <ProductCardSkeleton count={1} />
           ) : (
-            flagshipRemedies.map((product, idx) => (
+            displayRemedies.slice(0, 1).map((product, idx) => (
               <ProductCard key={product.id} product={product} index={idx} />
             ))
           )}
         </div>
       </section>
 
-      {/* 3. DEDICATED SPOTLIGHT: DAARU MUKTI POWDER (1 MONTH SUPPLY - ₹1,100) */}
+      {/* 3. DEDICATED SPOTLIGHT: SEA BUCKTHORN 99% PURE PULP (500 ML - ₹699) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -123,49 +119,49 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
             <div className="lg:col-span-8 space-y-6 text-left">
               
               <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#49352B] text-[#D8C3A5] border border-[#A7835E]/40 text-xs font-bold uppercase tracking-widest">
-                <Lock className="w-3.5 h-3.5 text-[#A7835E]" />
-                <span>100% Plain Box Discreet Packaging Guaranteed</span>
+                <Sparkles className="w-3.5 h-3.5 text-[#A7835E]" />
+                <span>100% Free Express Delivery PAN India</span>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center gap-3">
                   <h2 className="text-3xl sm:text-5xl font-bold font-serif-luxury text-[#FBF8F2] leading-tight">
-                    Daaru Mukti Powder
+                    Sea Buckthorn (Leh Berry)
                   </h2>
                   <span className="px-3 py-1 bg-[#A7835E] text-[#FBF8F2] text-xs uppercase tracking-widest font-bold rounded-xs">
-                    30 Daily Sachets
+                    99% Pure Pulp
                   </span>
                 </div>
                 <span className="text-[#D8C3A5] text-lg sm:text-xl font-hindi-luxury font-medium block">
-                  दारू मुक्ति चूर्ण • घर बैठे शराब की लत से प्राकृतिक मुक्ति
+                  हिमालयन संजीवनी फल रस • दैनिक स्वास्थ्य शॉट (500 ML)
                 </span>
               </div>
 
               <p className="text-sm sm:text-base text-[#F5EFE5]/85 leading-relaxed font-light max-w-2xl">
-                Classical de-addiction preparation combining <strong>Vidarikand (Kudzu Root)</strong> to curb neurological dopamine-triggered craving impulses with <strong>Bhumi Amla</strong> to flush toxic acetaldehyde and restore healthy liver parenchymal cells. Complete <strong>1 Month Supply containing 30 daily sachets (1 sachet each day for 30 days)</strong>.
+                Harvested from the pristine, high-altitude regions of the Himalayas, Sea Buckthorn (Leh Berry) is nature’s ultimate superfruit for daily vitality and radiant skin. Packed with potent antioxidants, natural Vitamin C, Vitamin E, and rare Omega-3, 6, 7, and 9 fatty acids, this golden-orange berry delivers complete cellular nourishment from within. Known in traditional wellness for boosting immunity, supporting heart and digestive health, and restoring skin elasticity, it offers pure, plant-based rejuvenation in every serving.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2 text-xs">
                 <div className="p-3.5 rounded-sm bg-white/10 border border-white/15 backdrop-blur-xs flex items-center gap-3">
                   <CheckCircle2 className="w-4 h-4 text-[#A7835E] shrink-0" />
-                  <span className="font-medium text-[#FAF8F3]">30 Daily Sachets (1/day)</span>
+                  <span className="font-medium text-[#FAF8F3]">Boosts Immunity & Heart</span>
                 </div>
                 <div className="p-3.5 rounded-sm bg-white/10 border border-white/15 backdrop-blur-xs flex items-center gap-3">
                   <CheckCircle2 className="w-4 h-4 text-[#A7835E] shrink-0" />
-                  <span className="font-medium text-[#FAF8F3]">Easily mixed in daily food/dal</span>
+                  <span className="font-medium text-[#FAF8F3]">Restores Skin Elasticity</span>
                 </div>
                 <div className="p-3.5 rounded-sm bg-white/10 border border-white/15 backdrop-blur-xs flex items-center gap-3">
                   <CheckCircle2 className="w-4 h-4 text-[#A7835E] shrink-0" />
-                  <span className="font-medium text-[#FAF8F3]">Visible change in 15–21 days</span>
+                  <span className="font-medium text-[#FAF8F3]">MSME, FSSAI & AYUSH Certified</span>
                 </div>
               </div>
 
               <div className="pt-4 flex flex-wrap items-center gap-4">
                 <Link
-                  to="/product/daaru-mukti-powder"
+                  to="/product/sea-buckthorn"
                   className="btn-bronze px-8 py-4 rounded-sm text-xs uppercase tracking-widest font-bold flex items-center gap-2.5 shadow-premium"
                 >
-                  <span>ORDER 1 MONTH SUPPLY (₹1,100)</span>
+                  <span>ORDER SEA BUCKTHORN (₹699)</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
@@ -185,27 +181,27 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
             {/* Right Side Visual Thumbnail */}
             <div className="lg:col-span-4 flex justify-center">
               <div className="relative bg-[#49352B] p-5 rounded-sm border border-[#A7835E]/40 text-center space-y-4 max-w-sm w-full shadow-premium">
-                <div className="aspect-square rounded-sm overflow-hidden bg-[#241A16] flex items-center justify-center p-4">
+                <div className="aspect-square rounded-sm overflow-hidden bg-[#241A16] flex items-center justify-center p-3">
                   <img
-                    src="/images/products/daaru-mukti-powder.png?v=20261113"
-                    alt="Daaru Mukti 30 Daily Sachets (1 Month Supply)"
+                    src="/images/products/sea-buckthorn.png?v=20261120_2"
+                    alt="Deepali Ayurveda Sea Buckthorn (Leh Berry) 99% Pure Pulp 500 ML"
                     className="w-full h-full object-contain drop-shadow-md"
                   />
                 </div>
                 <div className="space-y-1">
                   <span className="text-xs uppercase tracking-widest text-[#D8C3A5] font-bold block">
-                    1 Month Supply (30 Sachets)
+                    500 ML Daily Health Shot
                   </span>
                   <span className="text-3xl font-bold font-serif-luxury text-[#FBF8F2] block">
-                    {formatPrice(daaruMuktiProduct?.price ?? 1100)}
+                    {formatPrice(699)}
                   </span>
-                  <span className="text-xs text-[#D8C3A5]/60 line-through">₹1,599</span>
+                  <span className="text-xs text-[#D8C3A5]/60 line-through">₹999</span>
                 </div>
                 <Link
-                  to="/product/daaru-mukti-powder"
+                  to="/product/sea-buckthorn"
                   className="block w-full py-2.5 text-xs uppercase tracking-wider font-bold text-[#D8C3A5] hover:text-[#FBF8F2] border-t border-white/10 pt-3"
                 >
-                  View 30-Day Sachets & Dosage Guide →
+                  View Health Benefits & Dosage Guide →
                 </Link>
               </div>
             </div>
@@ -228,7 +224,7 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 max-w-lg mx-auto gap-8">
           {CATEGORY_DETAILS.map((cat, idx) => (
             <motion.div
               key={cat.id}
@@ -273,31 +269,31 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
         </div>
       </section>
 
-      {/* 5. COMPLETE STOREFRONT OF ALL 5 PRODUCTS */}
+      {/* 5. APOTHECARY STOREFRONT */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-[#35251F]/15 pb-6">
           <div className="space-y-1 text-left">
             <span className="text-xs uppercase tracking-widest text-[#A7835E] font-bold block mb-1">
-              Complete Storefront
+              Official Storefront
             </span>
             <h2 className="text-3xl sm:text-5xl font-bold font-serif-luxury text-[#35251F] tracking-tight">
-              All Classical Formulations
+              Flagship Formulation
             </h2>
           </div>
           <Link
             to="/shop"
             className="text-xs uppercase tracking-widest font-bold text-[#35251F] hover:text-[#A7835E] transition inline-flex items-center gap-2"
           >
-            <span>Search & Filter Catalog</span>
+            <span>View Full Formulation Details</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="max-w-md mx-auto">
           {loading ? (
-            <ProductCardSkeleton count={5} />
+            <ProductCardSkeleton count={1} />
           ) : (
-            products.map((product, idx) => (
+            products.slice(0, 1).map((product, idx) => (
               <ProductCard key={product.id} product={product} index={idx} />
             ))
           )}
@@ -379,6 +375,46 @@ export default function HomePage({ onOpenQuiz, onOpenConsult }: HomePageProps) {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* 7. WHY TRUST DEEPALI AYURVEDA — OFFICIAL CERTIFICATIONS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#A7835E] font-bold">
+            <ShieldCheck className="w-4 h-4" />
+            <span>Highest Quality & Regulatory Standards</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-bold font-serif-luxury text-[#35251F] tracking-tight">
+            Why Trust Deepali Ayurveda
+          </h2>
+          <p className="text-sm sm:text-base text-[#35251F]/80 font-light leading-relaxed">
+            Every bottle of our Himalayan Sea Buckthorn 99% Pure Pulp is manufactured in state-of-the-art facilities compliant with national and international regulatory standards.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {WHY_TRUST_CREDENTIALS.map((cred) => (
+            <div
+              key={cred.id}
+              className="bg-white p-5 rounded-sm border border-[#35251F]/15 text-center space-y-2 card-luxury flex flex-col justify-between"
+            >
+              <div className="w-12 h-12 rounded-full bg-[#F5EFE5] text-[#35251F] border border-[#A7835E]/40 flex items-center justify-center mx-auto shadow-xs font-bold font-serif-luxury text-[11px] text-[#A7835E]">
+                {cred.code}
+              </div>
+              <div className="space-y-1">
+                <h4 className="font-serif-luxury text-sm font-bold text-[#35251F]">
+                  {cred.title}
+                </h4>
+                <p className="text-[10px] uppercase tracking-wider text-[#A7835E] font-bold">
+                  {cred.subtitle}
+                </p>
+              </div>
+              <p className="text-[11px] text-[#35251F]/70 font-light leading-snug pt-1">
+                {cred.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 

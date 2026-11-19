@@ -286,7 +286,7 @@ export default function CheckoutPage() {
                     <img src={product.image} alt={product.name} className="w-10 h-10 object-contain p-0.5 rounded-xs border border-[#35251F]/10 bg-[#FAF6EE]" />
                     <div>
                       <span className="font-semibold text-[#35251F] block line-clamp-1">{product.name}</span>
-                      <span className="text-[11px] text-[#A7835E] font-medium">Qty: {quantity} {(product.slug === 'daaru-mukti-powder' || product.id === 'daaru-mukti-powder') ? '• 1 Month Supply' : ''}</span>
+                      <span className="text-[11px] text-[#A7835E] font-medium">Qty: {quantity} • {product.volume || '500 ML'}</span>
                     </div>
                   </div>
                   <span className="font-bold text-[#35251F]">{formatPrice(product.price * quantity)}</span>

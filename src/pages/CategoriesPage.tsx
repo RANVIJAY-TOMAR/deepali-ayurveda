@@ -17,9 +17,7 @@ export default function CategoriesPage() {
   const displayedProducts = activeCatId === 'all'
     ? products
     : products.filter((p) => {
-      if (activeCatId === 'ayurvedic-medicines') return p.category === 'Ayurvedic Medicines';
       if (activeCatId === 'herbal-formulations') return p.category === 'Herbal Formulations';
-      if (activeCatId === 'digestive-wellness') return p.category === 'Digestive Wellness';
       return true;
     });
 
@@ -46,7 +44,7 @@ export default function CategoriesPage() {
               Product Categories
             </h1>
             <p className="text-sm sm:text-base text-[#35251F]/85 leading-relaxed font-light">
-              Explore classical herbal remedies categorized by physiological action: de-addiction recovery, cell-nutrition tonics, and gut fire kindle.
+              Explore authentic classical herbal formulations and whole-plant berry extracts for cellular vitality, natural immunity, and cardiovascular wellness.
             </p>
           </div>
         </div>
@@ -110,15 +108,15 @@ export default function CategoriesPage() {
           </div>
         )}
 
-        {/* Filtered Products Grid: Loading, Error & Populated Grid */}
+        {/* Filtered Products Grid */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ProductCardSkeleton count={3} />
+          <div className="max-w-md mx-auto">
+            <ProductCardSkeleton count={1} />
           </div>
         ) : error ? (
           <CatalogErrorState message={error} onRetry={refetch} />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="max-w-md mx-auto">
             {displayedProducts.map((p, idx) => (
               <ProductCard key={p.id} product={p} index={idx} />
             ))}

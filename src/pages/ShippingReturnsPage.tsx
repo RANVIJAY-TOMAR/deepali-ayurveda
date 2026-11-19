@@ -44,7 +44,7 @@ export default function ShippingReturnsPage() {
             </h2>
           </div>
           <p>
-            Every order from <strong>{BRAND_NAME}</strong>—including our <strong>1 Month Supply Daaru Mukti Powder</strong>—is packed inside a heavy-duty, unprinted brown corrugated box with tamper-evident security tape.
+            Every order from <strong>{BRAND_NAME}</strong>—including our flagship <strong>Himalayan Sea Buckthorn 99% Pure Pulp (500 ML)</strong>—is packed inside a heavy-duty, unprinted brown corrugated box with tamper-evident security tape.
           </p>
           <div className="p-5 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/30 text-xs text-[#35251F] space-y-2 font-medium">
             <span className="font-bold text-[#35251F] uppercase tracking-wider block">Discretion Guarantee:</span>
@@ -84,10 +84,10 @@ export default function ShippingReturnsPage() {
         {/* Section 3: Shipping Rates & Payment Policy */}
         <section className="bg-white p-8 rounded-sm border border-[#35251F]/15 shadow-sm space-y-3 card-luxury">
           <h2 className="font-serif-luxury text-xl font-bold text-[#35251F]">
-            3. Complimentary Delivery Threshold & Payment Terms
+            3. Complimentary Pan-India Delivery on All Orders
           </h2>
           <p>
-            All domestic orders with a basket value of <strong>₹500 or above</strong> qualify for <strong>Complimentary Pan-India Shipping</strong>. For orders below ₹500, a standard delivery and shipment fee of <strong>₹100</strong> is applied at checkout.
+            All domestic orders qualify for <strong>100% Complimentary Free Pan-India Delivery</strong> across all serviceable pincodes at zero shipping fee.
           </p>
           <div className="p-4 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/30 text-xs text-[#35251F] space-y-1">
             <span className="font-bold block uppercase tracking-wider text-[#A7835E]">

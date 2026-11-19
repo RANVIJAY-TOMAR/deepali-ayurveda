@@ -110,7 +110,6 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
     );
   }
 
-  const isDaaruMukti = product.slug === 'daaru-mukti-powder' || product.id === 'daaru-mukti-powder';
   const relatedProducts = allProducts
     .filter((p) => p.id !== product.id && p.slug !== product.slug)
     .slice(0, 3);
@@ -161,15 +160,9 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
 
             {/* Top Badges */}
             <div className="absolute top-4 left-4 flex flex-col gap-2 items-start">
-              {isDaaruMukti ? (
-                <span className="text-xs uppercase tracking-widest font-bold px-3 py-1 bg-[#35251F] text-[#FBF8F2] border border-[#A7835E] rounded-xs shadow-xs">
-                  ★ 1 Month Supply (30 Sachets)
-                </span>
-              ) : (
-                <span className="text-xs uppercase tracking-widest font-bold px-3 py-1 bg-[#35251F] text-[#FBF8F2] border border-[#A7835E] rounded-xs shadow-xs">
-                  {product.tag}
-                </span>
-              )}
+              <span className="text-xs uppercase tracking-widest font-bold px-3 py-1 bg-[#35251F] text-[#FBF8F2] border border-[#A7835E] rounded-xs shadow-xs">
+                {product.tag}
+              </span>
               <span className="text-xs bg-white/95 text-[#35251F] px-3 py-1 font-semibold border border-[#35251F]/15 rounded-xs flex items-center gap-1.5 shadow-xs backdrop-blur-xs">
                 <Leaf className="w-3.5 h-3.5 text-[#A7835E]" />
                 <span>100% Classical Shastriya</span>
@@ -237,11 +230,9 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
               </span>
               <span className="text-gray-300">•</span>
               <span className="text-xs text-[#A7835E] font-bold">{product.volume}</span>
-              {isDaaruMukti && (
-                <span className="text-xs font-bold bg-[#35251F] text-[#FBF8F2] px-2.5 py-0.5 rounded-xs">
-                  30 Daily Sachets (1 Sachet/Day)
-                </span>
-              )}
+              <span className="text-xs font-bold bg-[#35251F] text-[#FBF8F2] px-2.5 py-0.5 rounded-xs">
+                Free Delivery PAN India
+              </span>
             </div>
 
             <h1 className="font-serif-luxury text-3xl sm:text-5xl font-bold text-[#35251F] leading-tight tracking-tight">
@@ -394,6 +385,39 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
                   <PhoneCall className="w-3 h-3 text-[#A7835E]" />
                 </button>
               )}
+            </div>
+
+            {/* Why Trust Deepali Ayurveda - Official Certification Badges */}
+            <div className="pt-2">
+              <span className="text-[11px] uppercase tracking-widest text-[#A7835E] font-bold block mb-2">
+                Why Trust Deepali Ayurveda • Certified Standards:
+              </span>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                <div className="p-2.5 bg-white rounded-xs border border-[#35251F]/15 flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#A7835E] shrink-0" />
+                  <span className="text-[11px] font-bold text-[#35251F]">MSME Certified</span>
+                </div>
+                <div className="p-2.5 bg-white rounded-xs border border-[#35251F]/15 flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#A7835E] shrink-0" />
+                  <span className="text-[11px] font-bold text-[#35251F]">FSSAI Certified</span>
+                </div>
+                <div className="p-2.5 bg-white rounded-xs border border-[#35251F]/15 flex items-center gap-2">
+                  <Award className="w-4 h-4 text-[#A7835E] shrink-0" />
+                  <span className="text-[11px] font-bold text-[#35251F]">AYUSH Certified</span>
+                </div>
+                <div className="p-2.5 bg-white rounded-xs border border-[#35251F]/15 flex items-center gap-2">
+                  <Lock className="w-4 h-4 text-[#A7835E] shrink-0" />
+                  <span className="text-[11px] font-bold text-[#35251F]">ISO 9001:2015</span>
+                </div>
+                <div className="p-2.5 bg-white rounded-xs border border-[#35251F]/15 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#A7835E] shrink-0" />
+                  <span className="text-[11px] font-bold text-[#35251F]">GMP Certified</span>
+                </div>
+                <div className="p-2.5 bg-white rounded-xs border border-[#35251F]/15 flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#A7835E] shrink-0" />
+                  <span className="text-[11px] font-bold text-[#35251F]">100% Lab Tested</span>
+                </div>
+              </div>
             </div>
           </div>
 

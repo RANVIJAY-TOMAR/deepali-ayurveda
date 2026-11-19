@@ -21,7 +21,7 @@ export default function PhilosophySection() {
       step: "Phase 03",
       title: "Dhatuposhan (Cell Nourishment)",
       desc: "Flooding vital tissues with bio-available plant vitamins, calcium, and Omega 7 for deep musculoskeletal regeneration.",
-      herb: "Plant B12 & Sea Buckthorn"
+      herb: "Himalayan Sea Buckthorn & Pure Extracts"
     },
     {
       step: "Phase 04",

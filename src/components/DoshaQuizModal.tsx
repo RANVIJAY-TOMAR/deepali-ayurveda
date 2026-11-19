@@ -9,30 +9,29 @@ import { formatPrice } from '../lib/format';
 const QUESTIONS = [
   {
     id: 'energy_nerves',
-    question: 'How do your daily vitality, nervous system, and habits feel?',
+    question: 'How do your daily vitality, immune resilience, and stamina feel?',
     options: [
-      { text: 'Frequent mental fatigue, peripheral tingling/numbness, afternoon exhaustion', target: 'vitamin-b12-d3-k2-calcium' },
-      { text: 'Persistent alcohol craving urges, liver fatigue, withdrawal restlessness', target: 'daaru-mukti-powder' },
-      { text: 'Sluggish metabolic rate, heavy snacking urges, afternoon energy slumps', target: 'apple-cider-vinegar-moringa' },
-      { text: 'High work burnout, physical depletion, slow cellular recovery', target: 'sea-buckthorn-extract-capsules' },
+      { text: 'Frequent morning fatigue, low physical stamina, slow cellular recovery', target: 'sea-buckthorn' },
+      { text: 'Frequent seasonal allergies, low immunity, and afternoon energy slumps', target: 'sea-buckthorn' },
+      { text: 'Urban pollution exposure, oxidative stress, and work burnout', target: 'sea-buckthorn' },
     ]
   },
   {
-    id: 'gut_stomach',
-    question: 'How does your digestive tract behave after meals?',
+    id: 'heart_cellular',
+    question: 'How do your cardiovascular wellness and cellular inflammation feel?',
     options: [
-      { text: 'Chronic gas, post-meal bloating, acidity, or irregular morning elimination', target: 'digest-guru-churan' },
-      { text: 'Frequent overeating, frequent hunger between scheduled meals', target: 'apple-cider-vinegar-moringa' },
-      { text: 'Normal digestion, but systemic oxidative fatigue, low immunity', target: 'sea-buckthorn-extract-capsules' },
+      { text: 'Seeking natural Omega 3, 6, 7 & 9 for heart health and circulation', target: 'sea-buckthorn' },
+      { text: 'Systemic cellular inflammation, joint stiffness, or oxidative load', target: 'sea-buckthorn' },
+      { text: 'Desire for 100% plant-based antioxidants without synthetic isolates', target: 'sea-buckthorn' },
     ]
   },
   {
     id: 'skin_aging',
     question: 'What are your primary physiological wellness objectives?',
     options: [
-      { text: 'Dry skin, dry eyes, loss of tissue hydration, high oxidative stress', target: 'sea-buckthorn-extract-capsules' },
-      { text: 'Joint stiffness, bone ache, low sunlight exposure (indoor desk work)', target: 'vitamin-b12-d3-k2-calcium' },
-      { text: 'Alcohol habit de-addiction and deep liver cell detoxification', target: 'daaru-mukti-powder' },
+      { text: 'Dry, dehydrated skin, chronic dry eyes, or loss of tissue moisture', target: 'sea-buckthorn' },
+      { text: 'Anti-aging antioxidant defense and radiant youthful skin glow', target: 'sea-buckthorn' },
+      { text: 'Daily health shot ritual for holistic immune and metabolic vitality', target: 'sea-buckthorn' },
     ]
   }
 ];
@@ -190,7 +189,7 @@ export default function DoshaQuizModal({ isOpen, onClose }: DoshaQuizModalProps)
                         {prod.name}
                       </h5>
                       <span className="text-[11px] text-[#A7835E] font-medium block">
-                        {prod.id === 'daaru-mukti-powder' ? '1 Month Supply' : prod.volume}
+                        {prod.volume || '500 ML'}
                       </span>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-xs font-bold text-[#35251F]">

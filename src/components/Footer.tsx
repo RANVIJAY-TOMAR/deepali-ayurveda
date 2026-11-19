@@ -41,31 +41,11 @@ export default function Footer() {
             
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[#49352B] text-[#D8C3A5] flex items-center justify-center shrink-0">
-                <Leaf className="w-5 h-5 text-[#A7835E]" />
-              </div>
-              <div>
-                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">100% Shastriya</h4>
-                <p className="text-[11px] text-[#D8C3A5]/70 font-light">Zero synthetic chemicals</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#49352B] text-[#D8C3A5] flex items-center justify-center shrink-0">
-                <Lock className="w-5 h-5 text-[#A7835E]" />
-              </div>
-              <div>
-                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">Discreet Packaging</h4>
-                <p className="text-[11px] text-[#D8C3A5]/70 font-light">100% Plain sealed box</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#49352B] text-[#D8C3A5] flex items-center justify-center shrink-0">
                 <Truck className="w-5 h-5 text-[#A7835E]" />
               </div>
               <div>
-                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">Free Express Shipping</h4>
-                <p className="text-[11px] text-[#D8C3A5]/70 font-light">Complimentary above ₹500</p>
+                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">Free Delivery</h4>
+                <p className="text-[11px] text-[#D8C3A5]/70 font-light">PAN India complimentary</p>
               </div>
             </div>
 
@@ -74,18 +54,38 @@ export default function Footer() {
                 <ShieldCheck className="w-5 h-5 text-[#A7835E]" />
               </div>
               <div>
-                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">Tested for Purity</h4>
-                <p className="text-[11px] text-[#D8C3A5]/70 font-light">NABL Heavy metal free</p>
+                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">MSME & FSSAI</h4>
+                <p className="text-[11px] text-[#D8C3A5]/70 font-light">Govt. Certified Safety</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#49352B] text-[#D8C3A5] flex items-center justify-center shrink-0">
+                <Award className="w-5 h-5 text-[#A7835E]" />
+              </div>
+              <div>
+                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">AYUSH & GMP</h4>
+                <p className="text-[11px] text-[#D8C3A5]/70 font-light">Cleanroom Manufacturing</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#49352B] text-[#D8C3A5] flex items-center justify-center shrink-0">
+                <Lock className="w-5 h-5 text-[#A7835E]" />
+              </div>
+              <div>
+                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">ISO 9001:2015</h4>
+                <p className="text-[11px] text-[#D8C3A5]/70 font-light">Certified Quality System</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3 col-span-2 sm:col-span-1">
               <div className="w-10 h-10 rounded-full bg-[#49352B] text-[#D8C3A5] flex items-center justify-center shrink-0">
-                <Award className="w-5 h-5 text-[#A7835E]" />
+                <Sparkles className="w-5 h-5 text-[#A7835E]" />
               </div>
               <div>
-                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">Established {BRAND_ESTABLISHED}</h4>
-                <p className="text-[11px] text-[#D8C3A5]/70 font-light">Unnao, River Ganga region</p>
+                <h4 className="font-serif-luxury text-sm font-bold text-[#FBF8F2]">100% Lab Tested</h4>
+                <p className="text-[11px] text-[#D8C3A5]/70 font-light">Heavy Metal & Toxin Free</p>
               </div>
             </div>
 
@@ -145,38 +145,14 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs text-[#F5EFE5]/80">
               <li>
-                <Link to="/product/daaru-mukti-powder" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
-                  <span>Daaru Mukti Powder (1 Mo.)</span>
-                  <span className="text-[10px] text-[#A7835E] font-bold">₹1,100</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/b12" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
-                  <span>Plant Vitamin B12 (4-in-1)</span>
-                  <span className="text-[10px] text-[#A7835E] font-bold">₹599</span>
-                </Link>
-              </li>
-              <li>
                 <Link to="/product/sea-buckthorn" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
-                  <span>Sea Buckthorn Pure Extract</span>
-                  <span className="text-[10px] text-[#A7835E] font-bold">₹599</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/apple-cider-vinegar" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
-                  <span>Apple Cider Vinegar + Moringa</span>
-                  <span className="text-[10px] text-[#A7835E] font-bold">₹293</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/product/digest-guru" className="hover:text-[#D8C3A5] transition flex items-center justify-between">
-                  <span>Digest Guru Churan</span>
-                  <span className="text-[10px] text-[#A7835E] font-bold">₹199</span>
+                  <span>Sea Buckthorn 99% Pure Pulp (500 ML)</span>
+                  <span className="text-[10px] text-[#A7835E] font-bold">₹699</span>
                 </Link>
               </li>
               <li className="pt-2 border-t border-[#49352B]">
                 <Link to="/shop" className="text-[#A7835E] hover:underline font-bold">
-                  View All Products →
+                  View Sea Buckthorn Details →
                 </Link>
               </li>
             </ul>

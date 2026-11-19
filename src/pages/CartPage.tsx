@@ -148,12 +148,10 @@ export default function CartPage() {
                       {product.name}
                     </Link>
                     <div className="flex items-center gap-2 text-xs text-[#A7835E] font-bold">
-                      <span>{product.volume}</span>
-                      {(product.slug === 'daaru-mukti-powder' || product.id === 'daaru-mukti-powder') && (
-                        <span className="px-2 py-0.5 bg-[#F5EFE5] text-[#35251F] border border-[#D8C3A5] rounded-xs text-[10px] uppercase tracking-wider font-bold">
-                          1 Month Supply
-                        </span>
-                      )}
+                      <span>{product.volume || '500 ML'}</span>
+                      <span className="px-2 py-0.5 bg-[#F5EFE5] text-[#35251F] border border-[#D8C3A5] rounded-xs text-[10px] uppercase tracking-wider font-bold">
+                        Free Delivery PAN India
+                      </span>
                     </div>
                     <span className="text-xs text-[#35251F]/60 block font-mono">
                       Unit: {formatPrice(product.price)}

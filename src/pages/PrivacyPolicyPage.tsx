@@ -45,7 +45,7 @@ export default function PrivacyPolicyPage() {
             </h2>
           </div>
           <p>
-            We recognize that formulations such as <strong>Daaru Mukti Powder</strong> (de-addiction and liver detox) address sensitive personal concerns.
+            We recognize that our Ayurvedic wellness formulations address personal and sensitive health priorities.
           </p>
           <div className="p-5 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/30 text-xs text-[#35251F] space-y-2 font-medium">
             <p className="flex items-center gap-2">

@@ -233,10 +233,9 @@ export default function ContactPage() {
                         className="w-full px-4 py-2.5 text-xs rounded-sm border border-[#35251F]/20 bg-[#FBF8F2] focus:outline-none focus:border-[#A7835E]"
                       >
                         <option>Talk to a Vaidya (₹{VAIDYA_CONSULTATION_FEE})</option>
-                        <option>Daaru Mukti (1 Month Supply) Inquiry</option>
-                        <option>Plant Vitamin B12 / Mineral Guidance</option>
-                        <option>Digest Guru / Gut Health Questions</option>
-                        <option>Discreet Packaging & Order Dispatch</option>
+                        <option>Sea Buckthorn (500 ML) Product Inquiry</option>
+                        <option>Daily Health Shot & Dosage Guidance</option>
+                        <option>Pan-India Free Delivery & Order Dispatch</option>
                         <option>Other General Question</option>
                       </select>
                     </div>

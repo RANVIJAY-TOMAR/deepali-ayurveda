@@ -122,7 +122,7 @@ export default function AboutPage() {
             </div>
             <h3 className="font-serif-luxury text-lg font-bold text-[#35251F]">Whole-Plant Synergy</h3>
             <p className="text-xs sm:text-sm text-[#35251F]/80 leading-relaxed font-light">
-              We reject synthetic isolates. Plants evolved complex phytocomplexes where companion co-factors ensure high physiological bio-absorption.
+              Harvested from pristine, high-altitude Himalayan regions. We preserve nature’s complex phytocomplexes where companion co-factors ensure maximum bio-absorption.
             </p>
           </div>
 
@@ -130,9 +130,9 @@ export default function AboutPage() {
             <div className="w-12 h-12 rounded-full bg-[#F5EFE5] text-[#35251F] flex items-center justify-center">
               <Clock className="w-6 h-6 text-[#A7835E]" />
             </div>
-            <h3 className="font-serif-luxury text-lg font-bold text-[#35251F]">Slow Kwath Boiling</h3>
+            <h3 className="font-serif-luxury text-lg font-bold text-[#35251F]">Slow Cold Processing</h3>
             <p className="text-xs sm:text-sm text-[#35251F]/80 leading-relaxed font-light">
-              Traditional slow-heat water decoction preserves volatile essential principles and eliminates the harsh chemical residues common in fast industrial extraction.
+              Carefully processed without harsh solvent extraction, preserving volatile Omegas 3, 6, 7 & 9, natural Vitamin C, and natural Vitamin E.
             </p>
           </div>
 
@@ -140,7 +140,7 @@ export default function AboutPage() {
             <div className="w-12 h-12 rounded-full bg-[#F5EFE5] text-[#35251F] flex items-center justify-center">
               <ShieldCheck className="w-6 h-6 text-[#A7835E]" />
             </div>
-            <h3 className="font-serif-luxury text-lg font-bold text-[#35251F]">NABL Tested Purity</h3>
+            <h3 className="font-serif-luxury text-lg font-bold text-[#35251F]">100% Lab Tested Purity</h3>
             <p className="text-xs sm:text-sm text-[#35251F]/80 leading-relaxed font-light">
               Every production batch is tested in accredited laboratories to verify zero presence of harmful heavy metals (Lead, Mercury, Arsenic) or synthetic fillers.
             </p>
@@ -148,11 +148,11 @@ export default function AboutPage() {
 
           <div className="p-8 bg-white rounded-sm border border-[#35251F]/15 space-y-3 card-luxury text-left">
             <div className="w-12 h-12 rounded-full bg-[#F5EFE5] text-[#35251F] flex items-center justify-center">
-              <Lock className="w-6 h-6 text-[#A7835E]" />
+              <Award className="w-6 h-6 text-[#A7835E]" />
             </div>
-            <h3 className="font-serif-luxury text-lg font-bold text-[#35251F]">100% Plain Box Discretion</h3>
+            <h3 className="font-serif-luxury text-lg font-bold text-[#35251F]">MSME, FSSAI & AYUSH</h3>
             <p className="text-xs sm:text-sm text-[#35251F]/80 leading-relaxed font-light">
-              All orders are dispatched in plain brown cardboard packaging without external remedy markings, ensuring complete personal privacy for every patron.
+              Certified under ISO 9001:2015 and GMP manufacturing standards, guaranteeing authentic Ayurvedic integrity in every bottle.
             </p>
           </div>
         </div>
@@ -169,7 +169,7 @@ export default function AboutPage() {
               Experience the True Science of Ayurveda
             </h3>
             <p className="text-xs sm:text-sm text-[#D8C3A5]/90 font-light">
-              From our flagship 1 Month Supply Daaru Mukti Powder to daily cellular vitality formulations, discover remedies rooted in tradition since 1997.
+              From our flagship Himalayan Sea Buckthorn 99% Pure Pulp Daily Health Shot to time-tested classical formulations, discover remedies rooted in tradition since 1997.
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4">

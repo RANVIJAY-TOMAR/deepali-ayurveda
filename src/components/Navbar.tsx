@@ -93,7 +93,7 @@ export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) 
           </div>
 
           <div className="hidden sm:flex items-center gap-6 text-[10px] uppercase font-semibold">
-            <span>Free Express Delivery Above ₹500</span>
+            <span>Free Delivery PAN India on All Orders</span>
             <span className="text-[#35251F]/40">•</span>
             <span>100% Plain Box Discreet Packaging</span>
             <span className="text-[#35251F]/40">•</span>
@@ -304,7 +304,7 @@ export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) 
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search Daaru Mukti, B12, Digest Guru, symptoms..."
+                  placeholder="Search Sea Buckthorn, immunity, omega 7, symptoms..."
                   autoFocus
                   className="w-full pl-12 pr-4 py-3.5 text-sm bg-white rounded-sm border border-[#35251F]/20 focus:outline-none focus:border-[#A7835E]"
                 />
@@ -316,7 +316,7 @@ export default function Navbar({ onOpenDoshaQuiz, onOpenConsult }: NavbarProps) 
                   Popular Searches:
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {["Daaru Mukti Powder", "Plant Vitamin B12", "Digest Guru Churan", "Sea Buckthorn", "Apple Cider Vinegar"].map((term) => (
+                  {["Sea Buckthorn", "99% Pure Pulp", "Daily Health Shot", "Omega 7", "Immunity", "Heart Health"].map((term) => (
                     <button
                       key={term}
                       onClick={() => setSearchQuery(term)}

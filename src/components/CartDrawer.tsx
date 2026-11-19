@@ -152,7 +152,7 @@ export default function CartDrawer() {
                         </button>
                       </div>
                       <span className="text-[11px] text-[#A7835E] font-bold">
-                        {(product.slug === 'daaru-mukti-powder' || product.id === 'daaru-mukti-powder') ? '1 Month Supply' : product.volume}
+                        {product.volume || '500 ML'}
                       </span>
                     </div>
 

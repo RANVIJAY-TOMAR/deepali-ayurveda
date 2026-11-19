@@ -64,31 +64,23 @@ export interface RetrievedOrder {
   }>;
 }
 
-// Authoritative mapping for product slug aliases
+// Authoritative mapping for product slug aliases - all mapped to canonical Sea Buckthorn
 export const PRODUCT_SLUG_MAP: Record<string, string> = {
-  'daaru-mukti-powder': 'daaru-mukti-powder',
-  'vitamin-b12-d3-k2-calcium': 'b12',
-  'b12': 'b12',
-  'sea-buckthorn-extract-capsules': 'sea-buckthorn',
   'sea-buckthorn': 'sea-buckthorn',
-  'apple-cider-vinegar-moringa': 'apple-cider-vinegar',
-  'apple-cider-vinegar': 'apple-cider-vinegar',
-  'digest-guru-churan': 'digest-guru',
-  'digest-guru': 'digest-guru'
+  'sea-buckthorn-extract-capsules': 'sea-buckthorn',
+  'daaru-mukti-powder': 'sea-buckthorn',
+  'b12': 'sea-buckthorn',
+  'vitamin-b12-d3-k2-calcium': 'sea-buckthorn',
+  'apple-cider-vinegar': 'sea-buckthorn',
+  'apple-cider-vinegar-moringa': 'sea-buckthorn',
+  'digest-guru': 'sea-buckthorn',
+  'digest-guru-churan': 'sea-buckthorn'
 };
 
-// Authoritative fallback catalog prices strictly matching specifications:
-// 1. Daaru Mukti Powder: ₹1,100
-// 2. B12: ₹599
-// 3. Sea Buckthorn: ₹599
-// 4. Apple Cider Vinegar: ₹293
-// 5. Digest Guru: ₹199
+// Authoritative fallback catalog prices:
+// Sea Buckthorn: ₹699 (Free Delivery PAN India)
 export const AUTHORITATIVE_PRICES: Record<string, number> = {
-  'daaru-mukti-powder': 1100.00,
-  'b12': 599.00,
-  'sea-buckthorn': 599.00,
-  'apple-cider-vinegar': 293.00,
-  'digest-guru': 199.00
+  'sea-buckthorn': 699.00
 };
 
 /**

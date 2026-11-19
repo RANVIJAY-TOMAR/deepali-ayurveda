@@ -84,11 +84,16 @@ export default function App() {
               <Route path="/categories" element={<CategoriesPage />} />
               <Route path="/categories/:categoryId" element={<CategoriesPage />} />
 
-              {/* 4. Product Details */}
-              <Route
-                path="/product/stamon-gold-capsules"
-                element={<Navigate to="/shop" replace />}
-              />
+              {/* 4. Product Details & Legacy Redirects */}
+              <Route path="/product/sea-buckthorn" element={<ProductDetailPage onOpenConsult={() => setIsConsultOpen(true)} />} />
+              <Route path="/product/daaru-mukti-powder" element={<Navigate to="/product/sea-buckthorn" replace />} />
+              <Route path="/product/b12" element={<Navigate to="/product/sea-buckthorn" replace />} />
+              <Route path="/product/vitamin-b12-d3-k2-calcium" element={<Navigate to="/product/sea-buckthorn" replace />} />
+              <Route path="/product/apple-cider-vinegar" element={<Navigate to="/product/sea-buckthorn" replace />} />
+              <Route path="/product/apple-cider-vinegar-moringa" element={<Navigate to="/product/sea-buckthorn" replace />} />
+              <Route path="/product/digest-guru" element={<Navigate to="/product/sea-buckthorn" replace />} />
+              <Route path="/product/digest-guru-churan" element={<Navigate to="/product/sea-buckthorn" replace />} />
+              <Route path="/product/stamon-gold-capsules" element={<Navigate to="/product/sea-buckthorn" replace />} />
               <Route
                 path="/product/:id"
                 element={
