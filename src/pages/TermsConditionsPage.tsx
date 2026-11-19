@@ -74,7 +74,16 @@ export default function TermsConditionsPage() {
 
         <section className="bg-white p-8 rounded-sm border border-[#35251F]/15 shadow-sm space-y-3 card-luxury">
           <h2 className="font-serif-luxury text-xl font-bold text-[#35251F]">
-            5. Office Inquiries & Customer Support
+            5. Replacement Guarantee & Refund Timelines
+          </h2>
+          <p>
+            We offer a <strong>100% Replacement Guarantee for Damaged/Wrong Items</strong> with dispatch in 24 hours. In approved cancellation or return circumstances, <strong>refunds are processed within 3–5 business days</strong> directly to your original payment method (UPI / Bank Account / Card).
+          </p>
+        </section>
+
+        <section className="bg-white p-8 rounded-sm border border-[#35251F]/15 shadow-sm space-y-3 card-luxury">
+          <h2 className="font-serif-luxury text-xl font-bold text-[#35251F]">
+            6. Office Inquiries & Customer Support
           </h2>
           <p>
             For any legal or service queries regarding orders, please contact our Unnao office:

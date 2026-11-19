@@ -295,6 +295,18 @@ export default function CartPage() {
               <ArrowRight className="w-4 h-4" />
             </button>
 
+            {/* Checkout Micro-Copy: Guarantee Badge */}
+            <div className="p-3 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/40 flex items-center justify-center gap-2 text-xs font-semibold text-[#35251F] text-center shadow-xs">
+              <ShieldCheck className="w-4 h-4 text-[#A7835E] shrink-0" />
+              <span>100% Replacement Guarantee for Damaged/Wrong Items • Dispatched in 24 Hours</span>
+            </div>
+
+            {/* Clear Refund Timelines Micro-Notice */}
+            <div className="px-3.5 py-2 bg-white rounded-sm border border-[#35251F]/15 flex items-center justify-between text-xs text-[#35251F]/80 shadow-xs">
+              <span className="font-medium text-[#35251F]/70">Refund Assurance:</span>
+              <span className="font-bold text-[#A7835E]">Refunds processed within 3–5 business days</span>
+            </div>
+
             {/* Packaging Reassurance */}
             <div className="p-4 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/30 text-xs text-[#35251F] space-y-1">
               <div className="flex items-center gap-2 font-bold text-[#A7835E]">

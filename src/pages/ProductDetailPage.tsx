@@ -365,9 +365,21 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
                     : 'btn-bronze cursor-pointer shadow-premium'
                 }`}
               >
-                <span>{!product.inStock ? 'Currently Unavailable' : 'Purchase Formulation'}</span>
+                <span>{!product.inStock ? 'Currently Unavailable' : 'Buy Now'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
+            </div>
+
+            {/* Checkout Micro-Copy: Guarantee Badge Directly Below Buy Now */}
+            <div className="p-3 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/40 flex items-center justify-center gap-2 text-xs font-semibold text-[#35251F] text-center shadow-xs">
+              <ShieldCheck className="w-4 h-4 text-[#A7835E] shrink-0" />
+              <span>100% Replacement Guarantee for Damaged/Wrong Items • Dispatched in 24 Hours</span>
+            </div>
+
+            {/* Clear Refund Timelines Micro-Notice */}
+            <div className="px-3.5 py-2 bg-white rounded-sm border border-[#35251F]/15 flex items-center justify-between text-xs text-[#35251F]/80">
+              <span className="font-medium">Refund Assurance:</span>
+              <span className="font-bold text-[#A7835E]">Refunds processed within 3–5 business days</span>
             </div>
 
             {/* Plain Box Guarantee Reassurance */}

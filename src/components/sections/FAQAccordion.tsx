@@ -36,6 +36,11 @@ const FAQS: FAQItem[] = [
     answer: "Deepali Ayurveda is officially MSME Certified, FSSAI Certified, AYUSH Certified, ISO 9001:2015 Certified, and GMP Certified. Furthermore, every production batch of our Himalayan Sea Buckthorn 99% Pure Pulp is independently 100% Lab Tested to guarantee complete absence of Lead, Mercury, Arsenic, microbial pathogens, synthetic fillers, added sugar, or chemical preservatives."
   },
   {
+    category: "Replacements & Refunds",
+    question: "What is your replacement policy and refund timeline?",
+    answer: "We offer a 100% Replacement Guarantee for damaged or wrong items, dispatched within 24 hours of reporting with zero extra charges. If a refund is requested, refunds are processed within 3–5 business days directly back to your original payment method (UPI / Bank Account / Card)."
+  },
+  {
     category: "Vaidya Consultation",
     question: `How does the 'Talk to a Vaidya' phone consultation work?`,
     answer: `You can schedule a personal consultation over a call with an experienced Ayurvedic Vaidya for ₹${VAIDYA_CONSULTATION_FEE} per call. We discuss your bodily symptoms, evaluate dosage schedules, and recommend appropriate dietary companion foods (Anupana).`

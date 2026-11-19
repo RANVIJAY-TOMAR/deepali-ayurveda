@@ -255,6 +255,18 @@ export default function CartDrawer() {
                 <ArrowRight className="w-4 h-4" />
               </button>
 
+              {/* Checkout Micro-Copy: Guarantee Badge */}
+              <div className="p-2.5 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/40 flex items-center justify-center gap-2 text-[11px] font-semibold text-[#35251F] text-center shadow-xs">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#A7835E] shrink-0" />
+                <span>100% Replacement Guarantee for Damaged/Wrong Items • Dispatched in 24 Hours</span>
+              </div>
+
+              {/* Clear Refund Timelines Micro-Notice */}
+              <div className="px-3 py-1.5 bg-[#FAF8F5] rounded-xs border border-[#35251F]/10 flex items-center justify-between text-[11px] text-[#35251F]/80">
+                <span className="font-medium text-[#35251F]/70">Refund Assurance:</span>
+                <span className="font-bold text-[#A7835E]">Refunds processed within 3–5 business days</span>
+              </div>
+
               <div className="flex items-center justify-center gap-2 text-[11px] text-[#35251F]/65 font-medium">
                 <Lock className="w-3.5 h-3.5 text-[#A7835E]" />
                 <span>100% Plain Box Discreet Packaging Guaranteed</span>

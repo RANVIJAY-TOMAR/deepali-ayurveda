@@ -99,20 +99,57 @@ export default function ShippingReturnsPage() {
           </div>
         </section>
 
-        {/* Section 4: Replacement Policy */}
-        <section className="bg-white p-8 rounded-sm border border-[#35251F]/15 shadow-sm space-y-3 card-luxury">
+        {/* Section 4: Replacement Guarantee */}
+        <section className="bg-white p-8 rounded-sm border border-[#35251F]/15 shadow-sm space-y-4 card-luxury">
           <div className="flex items-center gap-2.5">
             <RefreshCw className="w-5 h-5 text-[#A7835E]" />
             <h2 className="font-serif-luxury text-xl font-bold text-[#35251F]">
-              4. Damage Guarantee & Fresh Replacement Policy
+              4. 100% Replacement Guarantee for Damaged/Wrong Items
             </h2>
           </div>
           <p>
-            Due to the medicinal nature of our Ayurvedic formulations, opened or consumed products cannot be restocked. However, if your shipment arrives damaged in transit or defective, we provide an immediate <strong>100% Free Replacement</strong>.
+            Due to the medicinal nature of our Ayurvedic formulations, opened or consumed products cannot be restocked. However, if your shipment arrives damaged in transit or you receive an incorrect item, we provide an immediate <strong>100% Replacement Guarantee</strong>.
           </p>
+          <div className="p-4 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/40 flex items-center gap-3 text-xs font-semibold text-[#35251F]">
+            <ShieldCheck className="w-5 h-5 text-[#A7835E] shrink-0" />
+            <span>100% Replacement Guarantee for Damaged/Wrong Items • Dispatched in 24 Hours</span>
+          </div>
           <p className="text-xs text-[#35251F]/80 font-light">
-            Simply share a photo of the damaged carton via WhatsApp at <a href={`tel:${BRAND_SUPPORT_PHONE}`} className="underline font-bold text-[#A7835E]">{BRAND_SUPPORT_PHONE_DISPLAY}</a> or email <a href={`mailto:${BRAND_SUPPORT_EMAIL}`} className="underline font-bold text-[#A7835E]">{BRAND_SUPPORT_EMAIL}</a> within 48 hours of delivery. Our Unnao team will dispatch a replacement parcel at zero additional cost.
+            Simply share a clear photo of the damaged parcel or outer shipping label via WhatsApp at <a href={`tel:${BRAND_SUPPORT_PHONE}`} className="underline font-bold text-[#A7835E]">{BRAND_SUPPORT_PHONE_DISPLAY}</a> or email <a href={`mailto:${BRAND_SUPPORT_EMAIL}`} className="underline font-bold text-[#A7835E]">{BRAND_SUPPORT_EMAIL}</a> within 48 hours of delivery. A brand-new replacement parcel will be dispatched within 24 hours at zero extra charge.
           </p>
+        </section>
+
+        {/* Section 5: Clear Refund Timelines */}
+        <section className="bg-white p-8 rounded-sm border-2 border-[#A7835E]/40 shadow-lift space-y-4 card-luxury">
+          <div className="flex items-center gap-2.5">
+            <ShieldCheck className="w-5 h-5 text-[#A7835E]" />
+            <h2 className="font-serif-luxury text-xl font-bold text-[#35251F]">
+              5. Refund Policy & Clear Timelines
+            </h2>
+          </div>
+          <p>
+            We uphold complete transparency regarding billing and returns. If a replacement is not feasible or an order cancellation is approved prior to dispatch, our refund timeline is strictly honored as follows:
+          </p>
+          <div className="p-5 bg-[#F5EFE5] rounded-sm border border-[#A7835E]/40 text-xs text-[#35251F] space-y-3 font-medium">
+            <div className="flex items-center gap-2 text-sm font-bold text-[#35251F] uppercase tracking-wider">
+              <CheckCircle className="w-4 h-4 text-[#A7835E]" />
+              <span>Clear Refund Timelines:</span>
+            </div>
+            <p className="text-sm font-bold text-[#A7835E]">
+              Refunds processed within 3–5 business days.
+            </p>
+            <ul className="list-disc pl-5 space-y-2 text-[#35251F]/85 font-light text-xs">
+              <li>
+                <strong>UPI Payments:</strong> Refunds are initiated directly to your linked UPI VPA/Bank Account. The amount typically reflects within <strong>3–5 business days</strong>.
+              </li>
+              <li>
+                <strong>Debit/Credit Cards & Net Banking:</strong> Refunds are credited directly back to the original funding account or card statement within <strong>3–5 business days</strong>, subject to your card issuer’s clearing timeline.
+              </li>
+              <li>
+                <strong>Notification:</strong> You will receive an immediate confirmation SMS/email with the payment gateway refund reference ID (RRN) as soon as the refund is initiated.
+              </li>
+            </ul>
+          </div>
         </section>
 
       </div>
