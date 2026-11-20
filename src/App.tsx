@@ -85,7 +85,7 @@ export default function App() {
               <Route path="/categories/:categoryId" element={<CategoriesPage />} />
 
               {/* 4. Product Details & Legacy Redirects */}
-              <Route path="/product/sea-buckthorn" element={<ProductDetailPage onOpenConsult={() => setIsConsultOpen(true)} />} />
+              <Route path="/product" element={<Navigate to="/product/sea-buckthorn" replace />} />
               <Route path="/product/daaru-mukti-powder" element={<Navigate to="/product/sea-buckthorn" replace />} />
               <Route path="/product/b12" element={<Navigate to="/product/sea-buckthorn" replace />} />
               <Route path="/product/vitamin-b12-d3-k2-calcium" element={<Navigate to="/product/sea-buckthorn" replace />} />

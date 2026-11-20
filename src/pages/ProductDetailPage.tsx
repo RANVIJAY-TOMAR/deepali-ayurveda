@@ -23,7 +23,7 @@ import {
   Truck,
   PhoneCall
 } from 'lucide-react';
-import { BRAND_NAME, VAIDYA_CONSULTATION_FEE } from '../data/products';
+import { BRAND_NAME, VAIDYA_CONSULTATION_FEE, PRODUCTS } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { formatPrice } from '../lib/format';
@@ -37,10 +37,12 @@ interface ProductDetailPageProps {
 
 export default function ProductDetailPage({ onOpenConsult }: ProductDetailPageProps) {
   const { id } = useParams<{ id: string }>();
+  const targetId = id || 'sea-buckthorn';
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
-  const { product, loading, error, refetch } = useProduct(id);
+  const { product: fetchedProduct, loading, error, refetch } = useProduct(targetId);
+  const product = fetchedProduct || PRODUCTS[0];
   const { products: allProducts } = useProducts();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'symptoms' | 'ingredients' | 'dosage' | 'safety'>('symptoms');
@@ -49,10 +51,10 @@ export default function ProductDetailPage({ onOpenConsult }: ProductDetailPagePr
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [targetId]);
 
   // If stamon gold is requested, redirect to shop
-  if (id === 'stamon-gold-capsules') {
+  if (targetId === 'stamon-gold-capsules') {
     navigate('/shop', { replace: true });
     return null;
   }
