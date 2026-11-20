@@ -8,6 +8,11 @@ export const BRAND_HERO_CTA = "EXPLORE PRODUCTS";
 export const BRAND_STORYLINE_GANGA = "Rooted in Unnao, on the banks of the sacred River Ganga.";
 export const BRAND_STORYLINE_HERITAGE = "Rooted in the heritage of Unnao. Inspired by the timeless wisdom of Ayurveda.";
 
+// Ownership & Legal Entity
+export const BRAND_PROPRIETOR = "Yogita Singh";
+export const BRAND_CARE_OF = "Ranvijay Singh";
+export const BRAND_LEGAL_ENTITY = "Deepali Ayurveda (Proprietor: Yogita Singh, C/o Ranvijay Singh)";
+
 // Contact Details
 export const BRAND_WHATSAPP_NUMBER = "919140086856";
 export const BRAND_SUPPORT_PHONE = "9140086856";

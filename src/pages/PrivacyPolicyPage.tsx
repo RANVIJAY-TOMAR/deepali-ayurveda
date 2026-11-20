@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
             1. Commitment to Absolute Confidentiality
           </h2>
           <p>
-            At <strong>{BRAND_NAME}</strong>, we respect your privacy and are committed to safeguarding personal, consultation, and delivery data. As an established Ayurvedic business serving patrons across India since 1997 from Unnao, Uttar Pradesh, all information provided to our Vaidyas and checkout system is treated with strict discretion.
+            At <strong>{BRAND_NAME}</strong> (sole proprietorship owned by <strong>Yogita Singh</strong>, in care of <strong>Ranvijay Singh</strong>), we respect your privacy and are committed to safeguarding personal, consultation, and delivery data. As an established Ayurvedic business serving patrons across India since 1997 from Unnao, Uttar Pradesh, all information provided to our Vaidyas and checkout system is treated with strict discretion.
           </p>
         </section>
 

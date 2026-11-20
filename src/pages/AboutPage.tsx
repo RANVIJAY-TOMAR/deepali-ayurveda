@@ -158,6 +158,21 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Business Ownership & Stewardship */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#FAF7F2] p-8 sm:p-12 rounded-sm border border-[#A7835E]/30 text-left space-y-4 shadow-subtle">
+          <span className="text-xs uppercase tracking-widest text-[#A7835E] font-bold block">
+            Business Leadership & Governance
+          </span>
+          <h3 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-[#35251F]">
+            Dedicated Stewardship Behind Deepali Ayurveda
+          </h3>
+          <p className="text-sm sm:text-base text-[#35251F]/85 font-light leading-relaxed max-w-3xl">
+            Deepali Ayurveda operates under the direct leadership of <strong>Proprietor Yogita Singh</strong> (in care of <strong>Ranvijay Singh</strong>). Anchored in Unnao along the banks of River Ganga, we unite traditional Shastriya discipline with certified modern manufacturing to bring authentic, whole-botanical wellness directly to your home.
+          </p>
+        </div>
+      </section>
+
       {/* Call to Action */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#35251F] text-[#FBF8F2] p-8 sm:p-12 rounded-sm text-center space-y-6 border border-[#A7835E]/40 shadow-lift">

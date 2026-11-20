@@ -127,6 +127,9 @@ export default function Footer() {
                 <MapPin className="w-4 h-4 text-[#A7835E] shrink-0 mt-0.5" />
                 <span><strong>Office Address:</strong> {BRAND_ADDRESS}</span>
               </div>
+              <div className="text-[11px] text-[#D8C3A5]/90 pt-0.5">
+                <span><strong>Proprietor:</strong> Yogita Singh (C/o Ranvijay Singh)</span>
+              </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#A7835E] shrink-0" />
                 <span>Phone: <a href={`tel:${BRAND_SUPPORT_PHONE}`} className="text-[#FBF8F2] hover:text-[#D8C3A5] font-semibold underline">{BRAND_SUPPORT_PHONE_DISPLAY}</a></span>
@@ -199,9 +202,14 @@ export default function Footer() {
 
         {/* Bottom Bar: Copyright & Regional Footnote */}
         <div className="mt-14 pt-8 border-t border-[#49352B] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#D8C3A5]/60 font-light">
-          <p>
-            © 1997–{new Date().getFullYear()} {BRAND_NAME}. All rights reserved. C-9, Awas Vikas Colony, Unnao, Uttar Pradesh.
-          </p>
+          <div>
+            <p>
+              © 1997–{new Date().getFullYear()} {BRAND_NAME}. All rights reserved. C-9, Awas Vikas Colony, Unnao, Uttar Pradesh.
+            </p>
+            <p className="text-[11px] text-[#D8C3A5]/80 pt-0.5">
+              Proprietor: <span className="text-[#FBF8F2] font-medium">Yogita Singh</span> (C/o Ranvijay Singh)
+            </p>
+          </div>
           <p className="text-[11px] text-[#D8C3A5]/80">
             Rooted in Unnao on the sacred River Ganga • Ayurveda Direct
           </p>

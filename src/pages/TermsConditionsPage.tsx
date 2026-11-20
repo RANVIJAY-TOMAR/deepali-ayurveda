@@ -89,6 +89,8 @@ export default function TermsConditionsPage() {
             For any legal or service queries regarding orders, please contact our Unnao office:
           </p>
           <div className="pt-2 text-xs font-medium space-y-1 text-[#35251F]">
+            <p><strong>Business Enterprise:</strong> Deepali Ayurveda</p>
+            <p><strong>Proprietor:</strong> Yogita Singh (C/o Ranvijay Singh)</p>
             <p><strong>Office Address:</strong> {BRAND_ADDRESS}</p>
             <p><strong>Direct Helpline:</strong> <a href={`tel:${BRAND_SUPPORT_PHONE}`} className="underline font-bold text-[#A7835E]">{BRAND_SUPPORT_PHONE_DISPLAY}</a></p>
             <p><strong>Email:</strong> <a href={`mailto:${BRAND_SUPPORT_EMAIL}`} className="underline font-bold text-[#A7835E]">{BRAND_SUPPORT_EMAIL}</a></p>

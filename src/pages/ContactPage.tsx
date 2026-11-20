@@ -146,7 +146,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-4 pb-5 border-b border-[#35251F]/10">
                 <div className="w-9 h-9 rounded-full bg-[#F5EFE5] text-[#35251F] flex items-center justify-center shrink-0">
                   <MapPin className="w-4 h-4 text-[#A7835E]" />
                 </div>
@@ -156,6 +156,21 @@ export default function ContactPage() {
                     {BRAND_ADDRESS}
                   </p>
                   <p className="text-xs text-[#35251F]/70 font-light">Established {BRAND_ESTABLISHED} • Sacred River Ganga Region</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-9 h-9 rounded-full bg-[#F5EFE5] text-[#35251F] flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-4 h-4 text-[#A7835E]" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[11px] uppercase tracking-widest text-[#35251F]/60 font-semibold block">Business Ownership & Governance</span>
+                  <p className="text-xs text-[#35251F] font-medium leading-relaxed">
+                    <strong>Proprietor:</strong> Yogita Singh
+                  </p>
+                  <p className="text-xs text-[#35251F]/80 font-light">
+                    <strong>In Care Of (C/o):</strong> Ranvijay Singh
+                  </p>
                 </div>
               </div>
 
