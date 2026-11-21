@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
@@ -43,13 +44,15 @@ export default function App() {
 
   return (
     <WishlistProvider>
-      {/* 9. HIGHLY PREMIUM CINEMATIC LOADING SCREEN */}
-      {!hasLoaded && (
-        <CinematicLoadingScreen
-          onComplete={() => setHasLoaded(true)}
-          minDuration={1400}
-        />
-      )}
+      {/* Cinematic Luxury Loading Screen */}
+      <AnimatePresence mode="wait">
+        {!hasLoaded && (
+          <CinematicLoadingScreen
+            onComplete={() => setHasLoaded(true)}
+            minDuration={1800}
+          />
+        )}
+      </AnimatePresence>
 
       <SmoothScroll>
         <div className="min-h-screen flex flex-col bg-[#FBF8F2] text-[#35251F] font-sans selection:bg-[#A7835E]/30 selection:text-[#35251F]">
